@@ -1,0 +1,18 @@
+requirements to start
+  ruby version 3.1.1
+  node v18.13.0
+  make sure you install yarn globally -> npm install -g yarn
+
+command to initialize rails project
+  rails new twitter-clone -T -d postgresql --css=bootstrap
+
+problems I had
+  didn't install yarn before the command so I had problems
+  I had sass gem installed in another version of ruby and had problems with that. Had to remove the whole ruby version to make sure it worked
+  I was using an M1 chip so I had to make sure I did all commands on an i386 architecture
+    to see which architecture your terminal/shell is using just run the command: arch
+  I had to update rbenv to make sure I was able to install ruby 3.1.1
+    I was able to update it with the same command I used to install it. from here: https://github.com/rbenv/rbenv-installer#:~:text=not%20already%20available.-,%23%20with%20curl,-curl%20%2DfsSL%20https
+
+
+
