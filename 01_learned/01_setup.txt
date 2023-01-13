@@ -42,6 +42,8 @@ problems I had creating/setting up the project
 
       then I was able to run the rails app with ./bin/dev normally
 
+      source: https://stackoverflow.com/a/73130514
+
   I had sass gem installed in another version of ruby and had problems with that
     had to remove the whole ruby version to make sure it worked
     probably not necessary to remove the other ruby version just make sure esbuild is installed first (previous issue)
