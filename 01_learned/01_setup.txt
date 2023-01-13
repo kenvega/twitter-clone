@@ -5,6 +5,7 @@ requirements to start
 
 command to initialize rails project
   rails new twitter-clone -T -d postgresql --css=bootstrap
+    this will set bootstrap as a css framework
 
 problems I had
   didn't install yarn before the command so I had problems
@@ -14,5 +15,7 @@ problems I had
   I had to update rbenv to make sure I was able to install ruby 3.1.1
     I was able to update it with the same command I used to install it. from here: https://github.com/rbenv/rbenv-installer#:~:text=not%20already%20available.-,%23%20with%20curl,-curl%20%2DfsSL%20https
 
-
-
+how to run the app
+  in the root folder run the command
+    ./bin/dev
+      this will start the rails server and also will make sass and bootstrap to work
