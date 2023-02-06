@@ -47,3 +47,22 @@ problems I had creating/setting up the project
   I had sass gem installed in another version of ruby and had problems with that
     had to remove the whole ruby version to make sure it worked
     probably not necessary to remove the other ruby version just make sure esbuild is installed first (previous issue)
+
+
+preguntas
+  creo que el create_with realmente no crea
+
+    puedes hacer pruebas
+
+    cuando tengas un modelo en el projecto de twitter que no sea de user
+
+      por ejemplo de 'tweet' podrias probar a usar el create_with
+
+        Tweet.create_with(text: "this is a test tweet")
+
+        y luego chequear despues de esto en rails console o un action si es que realmente se ha creado algo en la DB
+
+          o si realmente no se ha creado nada
+
+        y luego pon el find_or_create_by
+            

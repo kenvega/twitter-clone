@@ -1,0 +1,17 @@
+to add a class from bootstrap to an element in your rails app
+
+check the possible classes you can add here for example
+
+  https://getbootstrap.com/docs/5.3/components/buttons/
+
+then just add the class like this
+
+  class="btn btn-primary btn-lg"
+
+  example on how to use
+
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+
+      the button will change its shape
+
+    

@@ -1,0 +1,65 @@
+https://github.com/heartcombo/devise
+
+add the gem (try to maintain the alphabetic order of gems)
+
+  gem 'devise'
+
+then install the gem
+
+  in root of the project run
+    bundle
+
+run the devise generator
+
+  bundle exec rails generate devise:install
+
+  this creates config files for devise
+    config/initializers/devise.rb # config file for many options you can set in devise (email configs for sender, notifications, etc)
+    config/locales/devise.en.yml # translations for messages to show related to sign in, password recovery, etc
+
+setup the initial model
+
+  generate our first user model
+    bundle exec rails g devise user
+
+    this creates files
+
+      invoke  active_record
+      create    db/migrate/20230206020419_devise_create_users.rb # migration that creates user table with all user related fields (password recover, confirm email, lock account)
+      create    app/models/user.rb
+      invoke    rspec
+      create      spec/models/user_spec.rb
+      invoke      factory_bot
+      create        spec/factories/users.rb
+      insert    app/models/user.rb
+      route  devise_for :users
+
+run the migration created for the user
+
+  bundle exec rails db:migrate db:test:prepare
+
+
+some helper methods you can use from devise in the rails view files
+
+  user_signed_in?
+
+    ejm
+      <% if user_signed_in? %>
+      <% else %>
+      <% end %>
+
+in a view you can redirect the user to sign up
+
+  <%= link_to "Sign up", new_user_registration_path %>
+
+  that path is added by devise
+
+  it takes the user to `/users/sign_up` and shows them a form to sign up that you didn't create
+
+to redirect to log in
+
+  new_user_session_path
+
+  example
+
+    <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-primary btn-lg" %>
