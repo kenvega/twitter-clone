@@ -49,20 +49,19 @@ problems I had creating/setting up the project
     probably not necessary to remove the other ruby version just make sure esbuild is installed first (previous issue)
 
 
-preguntas
-  creo que el create_with realmente no crea
+questions to test
 
-    puedes hacer pruebas
+  I think the method create_with does not really create anything if it is not chained to other method
 
-    cuando tengas un modelo en el projecto de twitter que no sea de user
+    how to test
 
-      por ejemplo de 'tweet' podrias probar a usar el create_with
+      have a model in this project that is not the user
 
-        Tweet.create_with(text: "this is a test tweet")
+        use the method like this
 
-        y luego chequear despues de esto en rails console o un action si es que realmente se ha creado algo en la DB
+          Tweet.create_with(text: "this is a test tweet")
 
-          o si realmente no se ha creado nada
-
-        y luego pon el find_or_create_by
+          you can put this code in an action to see if it really created something or if it needs to be chained to something else to create
+    
+          then try to chain it with find_or_create_by
             
