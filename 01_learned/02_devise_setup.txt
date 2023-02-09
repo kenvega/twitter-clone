@@ -82,12 +82,12 @@ to customize the devise views (the log in / sign up)
         create    app/views/devise/confirmations/new.html.erb
         create    app/views/devise/passwords
         create    app/views/devise/passwords/edit.html.erb
-        create    app/views/devise/passwords/new.html.erb
+        create    app/views/devise/passwords/new.html.erb # forgot password page
         create    app/views/devise/registrations
         create    app/views/devise/registrations/edit.html.erb
-        create    app/views/devise/registrations/new.html.erb
+        create    app/views/devise/registrations/new.html.erb # sign up page
         create    app/views/devise/sessions
-        create    app/views/devise/sessions/new.html.erb
+        create    app/views/devise/sessions/new.html.erb # login page
         create    app/views/devise/unlocks
         create    app/views/devise/unlocks/new.html.erb
         invoke  erb
