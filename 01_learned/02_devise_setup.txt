@@ -103,5 +103,16 @@ to customize the devise views (the log in / sign up)
 
     example: /users/sign_up is tied to the file app/views/devise/registrations/new.html.erb
 
-  
-  
+when signing up a user you will have an error
+
+  undefined method `user_url' for #<Devise::RegistrationsController
+
+  this happens because the forms have turbo_stream format submissions and devise by default does not accept that
+
+    so to change it you need to change the config at config/initializers/devise.rb
+
+      you make sure there is a line like this:
+
+        config.navigational_formats = ['*/*', :html, :turbo_stream]
+
+    because you change an initializer file you need to reboot the server for changes to make effect
