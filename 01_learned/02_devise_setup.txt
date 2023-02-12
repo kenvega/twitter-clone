@@ -115,7 +115,7 @@ when signing up a user you will have an error
 
         config.navigational_formats = ['*/*', :html, :turbo_stream]
 
-    because you change an initializer file you need to reboot the server for changes to make effect
+    *** because you change an initializer file you need to reboot the server for changes to make effect
 
 to log out a user you use in the view
 
