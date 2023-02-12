@@ -1,0 +1,24 @@
+
+command to generate the basic tweet model/table
+  bundle exec rails g model Tweet user:references body:string
+
+    this creates some files (migrations, models, and specs)
+
+      invoke  active_record
+      create    db/migrate/20230212141726_create_tweets.rb
+      create    app/models/tweet.rb
+      invoke    rspec
+      create      spec/models/tweet_spec.rb
+      invoke      factory_bot
+      create        spec/factories/tweets.rb
+
+run the migrations so changes are made to the database
+  bundle exec rails db:migrate db:test:prepare
+
+    what is the db:test:prepare for?
+
+      so your test database is consistent with the changes you do to your development database
+
+      this way your new tests do not fail for syncing problems between development and test databases
+
+    this migration creates the table in the database
