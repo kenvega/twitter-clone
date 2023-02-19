@@ -123,3 +123,7 @@ to log out a user you use in the view
 
     example:
       <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "btn btn-primary" %>
+
+with devise installed these are some helper methods you can use
+
+  current_user (you can access this in controllers)
