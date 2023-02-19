@@ -1,0 +1,10 @@
+to run tests you run
+
+  bundle exec rspec
+
+an example of how a test can be done
+
+  RSpec.describe User, type: :model do
+    it { should have_many(:tweets).dependent(:destroy) }
+  end
+

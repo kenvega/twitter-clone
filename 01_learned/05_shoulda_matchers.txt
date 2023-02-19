@@ -1,0 +1,13 @@
+https://github.com/thoughtbot/shoulda-matchers
+
+you have to add this
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
+
+at the end of your spec/rails_helper.rb file according to the docs
+
+  this allows methods like .dependent to be identified by rspec
