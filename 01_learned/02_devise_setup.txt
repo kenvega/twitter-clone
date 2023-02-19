@@ -127,3 +127,23 @@ to log out a user you use in the view
 with devise installed these are some helper methods you can use
 
   current_user (you can access this in controllers)
+
+  destroy_user_session_path (route to log out)
+
+you can set an after sign in path with devise
+
+  so you can redirect them to a specific path when they are signed in
+
+  you can google it like: devise after sign in path
+
+  you set this in the ApplicationController and it's just a method
+
+  example to redirect the user to dashboard after they logged in
+
+    class ApplicationController < ActionController::Base
+      protected
+
+      def after_sign_in_path_for
+        dashboard_path
+      end
+    end
