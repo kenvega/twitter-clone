@@ -1,0 +1,13 @@
+some methods you can use in the controllers
+
+  redirect_to
+
+    example for the home controller the user does not need to see home once is logged in
+
+      so you can set the controller like this
+
+      class HomeController < ApplicationController
+        def index
+          redirect_to dashboard_path if user_signed_in?
+        end
+      end

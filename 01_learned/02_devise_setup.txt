@@ -147,3 +147,20 @@ you can set an after sign in path with devise
         dashboard_path
       end
     end
+
+you can redirect users to login if they are not logged in
+  just add this before_action to the controller you want to be protected
+
+    before_action :authenticate_user!
+
+  user will be redirected to the login page (by default: /users/sign_in)
+
+to use helper methods from devise in your tests
+  you have to make changes to spec/rails_helper.rb
+
+  make sure to add these 2 configs (to be able to use sign_in and create in request specs)
+    RSpec.configure do |config|
+      config.include FactoryBot::Syntax::Methods
+      ...
+      config.include Devise::Test::IntegrationHelpers, type: :request
+    end
