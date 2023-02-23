@@ -11,3 +11,7 @@ you have to add this
 at the end of your spec/rails_helper.rb file according to the docs
 
   this allows methods like .dependent to be identified by rspec
+
+a list of methods you can use in your tests when you use shoulda matchers
+
+  validate_uniqueness_of

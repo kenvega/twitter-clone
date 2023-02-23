@@ -1,0 +1,17 @@
+to run your created migrations (for db and test db)
+
+  bundle exec rails db:migrate db:test:prepare
+
+first migration to change a table was to add a username field to the users table
+
+  you can use camel case or snake case in the migration name. both will work the same
+
+    bundle exec rails g migration add_username_to_users username:string
+
+    bundle exec rails g migration AddUsernameToUsers other:string
+
+to add a field with a unique index here there is an example
+
+  def change
+    add_column :users, :username, :string, index: { unique: true }
+  end

@@ -1,0 +1,13 @@
+to validate uniqueness of a field in a table. example
+
+  class User < ApplicationRecord
+    ...
+
+    validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
+  end
+
+  if you added this validation after creating a few users you will have blank usernames so they wouldn't be valid
+    but with the allow_blank: true you avoid this issue
+
+
+
