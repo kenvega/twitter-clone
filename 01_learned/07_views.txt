@@ -1,0 +1,21 @@
+generally speaking you want to avoid putting logic in your view
+  most of your logic should be running in your backend
+    the frontend is mostly used to present data that was calculated in the backend
+
+  example
+    use a controller action specifically for users that are logged out
+    and then create a controller action specifically for users that are signed in
+    this way you can have separate views with less logic for this different cases instead of gathering all logic in just one single view
+
+
+an example on a form in a view with erb
+
+<%=form_with model: Tweet.new, url: tweets_path, local: true do |f| %>
+  <%= f.text_field :body %>
+  <%= f.submit %>
+<%end%>
+
+tweets_path is the path where you make your POST requests to create new tweets
+  you can also use a GET to this same path to get all tweets
+
+remember to try to avoid putting logic in views as much as possible

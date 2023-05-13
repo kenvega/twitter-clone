@@ -10,7 +10,7 @@ first migration to change a table was to add a username field to the users table
 
     bundle exec rails g migration AddUsernameToUsers other:string
 
-to add a field with a unique index here there is an example
+example on how to add a column with a unique index
 
   def change
     add_column :users, :username, :string, index: { unique: true }

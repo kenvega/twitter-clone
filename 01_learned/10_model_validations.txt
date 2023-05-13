@@ -1,3 +1,7 @@
+most validations can be found here
+  https://api.rubyonrails.org/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates
+
+
 to validate uniqueness of a field in a table. example
 
   class User < ApplicationRecord
@@ -6,8 +10,18 @@ to validate uniqueness of a field in a table. example
     validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
   end
 
-  if you added this validation after creating a few users you will have blank usernames so they wouldn't be valid
-    but with the allow_blank: true you avoid this issue
+  if you added this validation after creating a few users you will have blank usernames so they wouldn't be uniquely valid
+    to fix this you can set the option `, allow_blank: true` to the validation in the model file
+      you will also need to add that validation to the test with `.allow_blank`
 
 
+remember that in production applications you normally add the validations on the rails model but also on the database table
+  so you have more than 1 protection layer (one in the model and another in the table)
+
+
+if you want to check that a non-saved record is valid with the model validations you set you can do something like
+
+  user = User.new(name: 'John')
+  user.valid? # this will tell if the record is valid
+  user.errors # this will tell which validations are incorrect
 

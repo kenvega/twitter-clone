@@ -21,6 +21,7 @@ setup the initial model
 
   generate our first user model
     bundle exec rails g devise user
+      # this will create a devise model (which handles passwords, encryption, email confirmations, session management, account lockout)
 
     this creates files
 
@@ -52,7 +53,10 @@ in a view you can redirect the user to sign up
 
   <%= link_to "Sign up", new_user_registration_path %>
 
-  that path is added by devise
+  the helper method or path called `new_user_registration_path` is added by devise
+    you can use this one and other similar paths in:
+      - controllers to for example redirect the user when not signed in
+      - helper files to create methods that encapsulate the logic that generate a link to the path
 
   it takes the user to `/users/sign_up` and shows them a form to sign up that you didn't create
 
@@ -72,7 +76,8 @@ to customize the devise views (the log in / sign up)
 
     bundle exec rails g devise:views
 
-      this will generate a lot of views but they will be then customizable
+      this will generate a lot of the default views but now you can customize all of those views
+        for example you can now change the default views and use bootstrap css in those views instead
 
         create    app/views/devise/shared
         create    app/views/devise/shared/_error_messages.html.erb
@@ -107,15 +112,15 @@ when signing up a user you will have an error
 
   undefined method `user_url' for #<Devise::RegistrationsController
 
-  this happens because the forms have turbo_stream format submissions and devise by default does not accept that
+  this happens because the forms have turbostream format submissions and devise by default does not accept that
 
-    so to change it you need to change the config at config/initializers/devise.rb
+    so to change it you need to change the config at this initializer: config/initializers/devise.rb
 
-      you make sure there is a line like this:
+      make sure to leave it like this:
 
         config.navigational_formats = ['*/*', :html, :turbo_stream]
 
-    *** because you change an initializer file you need to reboot the server for changes to make effect
+    *** because you changed an initializer file you need to reboot the server for changes to take effect
 
 to log out a user you use in the view
 
@@ -154,13 +159,3 @@ you can redirect users to login if they are not logged in
     before_action :authenticate_user!
 
   user will be redirected to the login page (by default: /users/sign_in)
-
-to use helper methods from devise in your tests
-  you have to make changes to spec/rails_helper.rb
-
-  make sure to add these 2 configs (to be able to use sign_in and create in request specs)
-    RSpec.configure do |config|
-      config.include FactoryBot::Syntax::Methods
-      ...
-      config.include Devise::Test::IntegrationHelpers, type: :request
-    end

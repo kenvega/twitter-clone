@@ -20,8 +20,8 @@ command I used to create this rails project
     this will set bootstrap as a css framework
 
 I made sure to create files in the root of the project that forced me to use specific node and ruby versions
-  .nvmrc
-  .ruby-version
+  .nvmrc ---> v18.13.0
+  .ruby-version ---> 3.1.1
 
 problems I had creating/setting up the project
   I didn't install yarn before the command so I had problems

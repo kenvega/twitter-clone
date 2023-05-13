@@ -1,0 +1,41 @@
+to run tests you run
+
+  bundle exec rspec
+
+to use helper methods from the devise gem and factory_bot gem in your rspec tests
+  you have to make changes to spec/rails_helper.rb
+
+  make sure to add these 2 configs
+    RSpec.configure do |config|
+      config.include FactoryBot::Syntax::Methods
+      ...
+      config.include Devise::Test::IntegrationHelpers, type: :request
+    end
+
+    the line
+      config.include Devise::Test::IntegrationHelpers, type: :request
+
+        will allow you to use methods in your rspec tests like
+          sign_in
+          sign_out
+          current_user
+
+    and the line
+      config.include FactoryBot::Syntax::Methods
+
+        will allow you to use methods in your rspec tests like
+          create # to create instances of a factory with the specified attributes
+
+
+an example of how a test can be done
+
+  in the file spec/models/user_spec.rb you can have these tests:
+
+    require 'rails_helper'
+
+    RSpec.describe User, type: :model do
+      it { should have_many(:tweets).dependent(:destroy) }
+      it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
+    end
+
+

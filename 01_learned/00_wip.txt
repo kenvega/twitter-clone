@@ -3,3 +3,11 @@ WIP: part 5 min 12 approx
     create a form for user to set username
 
     https://www.youtube.com/watch?v=P_6tr2IyqTA
+
+    approx at 12 min when starting to create the username controller
+
+      creates a single controller just to have two methods: the new form that handles the redirect and updates the username
+                                                              and the method that actually updates the username
+
+                                                              the idea is to avoid having more logic in the controller
+                                                                so that every controller has its own responsability
