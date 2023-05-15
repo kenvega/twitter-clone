@@ -29,3 +29,5 @@ you might prefer to create a UsernameController instead of a UserController
 
   this way you can reduce the responsabilities of the UserController if it is ever created and that makes it easier to maintain
 
+
+skip_before_action

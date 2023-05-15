@@ -11,6 +11,23 @@ you can check more options at
   bundle exec rails routes --help
 
 
+paths like 'new_username_path' can be obtained when looking at all the routes
+
+  when checking all the routes with rails routes or through looking at localhost:3000/rails/info/routes
+
+    look at the prefix route and then just at '_path' at the end
+
+      example
+                Prefix Verb  URI Pattern              Controller#Action
+          new_username GET   /usernames/new(.:format) usernames#new
+              username PATCH /usernames/:id(.:format) usernames#update
+                       PUT   /usernames/:id(.:format) usernames#update
+
+          for this case you can see that if you want to redirect to the view to create a new username (usernames#new)
+            you can do this
+              redirect_to new_username_path
+
+
 you can set only methods to create a few routes
   resources :usernames, only: [:new, :update]
 

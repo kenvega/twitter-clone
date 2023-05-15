@@ -132,6 +132,8 @@ to log out a user you use in the view
 with devise installed these are some helper methods you can use
 
   current_user (you can access this in controllers)
+    if the user is not signed in the current_user will be nil so you can use safe navigator with this
+      something like current_user&.username&.blank?
 
   destroy_user_session_path (route to log out)
 

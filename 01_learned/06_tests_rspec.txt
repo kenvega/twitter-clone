@@ -26,6 +26,15 @@ to use helper methods from the devise gem and factory_bot gem in your rspec test
         will allow you to use methods in your rspec tests like
           create # to create instances of a factory with the specified attributes
 
+helper methods normally used from the rspec gem
+
+  let
+    to define memoized helper methods within a test suite
+      * memoized value: value computed the first time then cached and reused next time is called without computing it again
+
+  before
+    to define a block that runs before every test example
+
 
 an example of how a test can be done
 
