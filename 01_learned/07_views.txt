@@ -19,3 +19,10 @@ tweets_path is the path where you make your POST requests to create new tweets
   you can also use a GET to this same path to get all tweets
 
 remember to try to avoid putting logic in views as much as possible
+
+in a form view
+  the f.submit will have a default text but you can set it to a different text
+    example
+      <%= f.submit "Tweet", class: "btn btn-lg btn-twitter rounded-pill" %>
+
+      here the submit button will have the text "Tweet"

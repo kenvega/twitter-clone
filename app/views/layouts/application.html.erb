@@ -14,6 +14,20 @@
     <% if flash.any? %>
       <%= render "shared/flashes" %>
     <% end %>
-    <%= yield %>
+
+    <% if user_signed_in? %>
+      <div class="container py-2">
+        <div class="row">
+          <%# always show sidebar when signed in no matter the page you are in %>
+          <%= render 'shared/sidebar' %>
+
+          <%# then show the rest of the page that is custom based on what you are seeing %>
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
+
   </body>
 </html>
