@@ -26,3 +26,15 @@ in a form view
       <%= f.submit "Tweet", class: "btn btn-lg btn-twitter rounded-pill" %>
 
       here the submit button will have the text "Tweet"
+
+you can create partials where you see that code is reusable or to make the view more readable
+
+  you can create a file like app/views/shared/_sidebar.html.erb
+
+    where you can put like a in regular view
+
+      and then to use it in another view you can do this:
+
+        <%= render 'shared/sidebar' %>
+
+        * notice how the '_' character is not needed when using the partial

@@ -3,13 +3,7 @@
     <%= link_to "Home", dashboard_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
   </div>
 
-  <%=form_with model: Tweet.new, url: tweets_path, local: true do |f| %>
-    <%= f.text_area :body , class: "w-100 form-control tweet-input", placeholder: "What's happening" %>
-
-    <div class="d-flex justify-content-end">
-      <%= f.submit "Tweet", class: "btn btn-lg btn-twitter rounded-pill" %>
-    </div>
-  <%end%>
+  <%= render 'shared/tweet_form' %>
   <ul>
     <% Tweet.find_each do |tweet| %>
       <li><%= tweet.body %></li>
