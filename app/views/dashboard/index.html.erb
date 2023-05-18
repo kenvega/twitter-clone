@@ -3,12 +3,16 @@
     <%= link_to "Home", dashboard_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
   </div>
 
-  <%= render 'shared/tweet_form' %>
-  <ul>
-    <% Tweet.find_each do |tweet| %>
-      <li><%= tweet.body %></li>
-    <% end %>
-  </ul>
+  <div class="mb-4">
+    <%= render 'shared/tweet_form' %>
+  </div>
+
+  <%# Tweet.order(created_at: :desc).each do |tweet| %>
+    <%#= render "tweets/tweet", tweet: tweet %>
+  <%# end %>
+
+  <%# this is the same as above %>
+  <%= render Tweet.order(created_at: :desc) %>
 </div>
 
 <div class="col">Search Bar / Trending / Who to follow</div>
