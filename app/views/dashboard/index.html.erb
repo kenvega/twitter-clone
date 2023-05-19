@@ -12,7 +12,11 @@
   <%# end %>
 
   <%# this is the same as above %>
-  <%= render Tweet.order(created_at: :desc) %>
+  <%#= render Tweet.order(created_at: :desc) %>
+
+  <div id="tweets">
+    <%= render Tweet.order(created_at: :desc) %>
+  </div>
 </div>
 
 <div class="col">Search Bar / Trending / Who to follow</div>
