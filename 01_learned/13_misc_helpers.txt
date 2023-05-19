@@ -1,0 +1,7 @@
+helper methods I saw that are not exactly related to controllers, models, etc
+
+  .humanize
+
+    you can get a name from a username
+
+      "john_doe".humanize  --> "John doe"

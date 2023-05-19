@@ -1,0 +1,17 @@
+when making mistakes on console you should look for these keywords
+  they normally give you a broad idea of what went wrong
+
+    NoMethodError
+      usually you are trying to run a method from an object but you did not handle a case where that object is nil
+      and you get an error like this
+        undefined method `method_name' for nil:NilClass
+
+    SyntaxError
+      self explanatory. it normally mentions the line where you have a syntax error
+
+    StandardError
+      has appeared to me when doing something wrong with migrations before
+
+
+for rspec I've seen this error
+  Failure/Error

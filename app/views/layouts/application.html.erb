@@ -16,15 +16,19 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <div class="container py-2">
-        <div class="row">
-          <%# always show sidebar when signed in no matter the page you are in %>
-          <%= render 'shared/sidebar' %>
+      <% if controller_name == "usernames" %>
+        <%= yield %>
+      <% else %>
+        <div class="container py-2">
+          <div class="row">
+            <%# always show sidebar when signed in no matter the page you are in %>
+            <%= render 'shared/sidebar' %>
 
-          <%# then show the rest of the page that is custom based on what you are seeing %>
-          <%= yield %>
+            <%# then show the rest of the page that is custom based on what you are seeing %>
+            <%= yield %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% else %>
       <%= yield %>
     <% end %>
