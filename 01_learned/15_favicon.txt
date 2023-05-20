@@ -1,0 +1,9 @@
+to set the favicon
+
+  open app/views/layouts/application.html.erb
+
+  on the <head> element you can insert this
+
+    <%= favicon_link_tag asset_path("twitter.svg") %>
+
+    it seems that it looks for the file app/assets/images/twitter.svg automatically
