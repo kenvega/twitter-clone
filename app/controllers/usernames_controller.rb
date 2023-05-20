@@ -22,6 +22,6 @@ class UsernamesController < ApplicationController
   private
 
   def username_params
-    params.require(:user).permit(:username, :display_name)
+    params.require(:user).permit(:username, :display_name, :avatar)
   end
 end

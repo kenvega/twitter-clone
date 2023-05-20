@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :tweets, dependent: :destroy
 
+  has_one_attached :avatar
+
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
   # to make sure the display_name always has a value for users

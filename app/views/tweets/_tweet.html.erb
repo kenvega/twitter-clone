@@ -1,11 +1,16 @@
 <%= turbo_frame_tag dom_id(tweet) do %>
-  <div class="tweet py-3 px-4">
-    <% if (Time.zone.now - tweet.created_at) > 1.day %>
-      <p>@<%= tweet.user.username %> - <%= tweet.created_at.strftime("%b %-d") %></p>
-    <% else %>
-      <p>@<%= tweet.user.username %> - <%= time_ago_in_words(tweet.created_at) %></p>
-    <% end %>
+  <div class="tweet d-flex py-3 px-3">
+    <div class="flex-shrink-0">
+      <%= image_tag tweet.user.avatar, size: "48x48", class: "rounded-circle" %>
+    </div>
+    <div class="flex-grow-1 ms-3">
+      <% if (Time.zone.now - tweet.created_at) > 1.day %>
+        <p class="mb-0"><span class="fw-bolder"><%= tweet.user.display_name %></span> <span class="text-muted">@<%= tweet.user.username %> · <%= tweet.created_at.strftime("%b %-d") %></span></p>
+      <% else %>
+        <p class="mb-0"><span class="fw-bolder"><%= tweet.user.display_name %></span> <span class="text-muted">@<%= tweet.user.username %> · <%= time_ago_in_words(tweet.created_at) %></span></p>
+      <% end %>
+      <p class="mb-0"><%= tweet.body %></p>
+    </div>
 
-    <p class="mb-0"><%= tweet.body %></p>
   </div>
 <% end %>

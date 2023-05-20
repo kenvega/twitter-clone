@@ -12,6 +12,11 @@
       <%= f.text_field :display_name, class: "form-control" %>
     </div>
 
-    <%= f.submit "Set username and display name", class: "btn btn-primary btn-twitter rounded-pill" %>
+    <div class="input-group mb-3">
+      <%= f.label :avatar, class: "input-group-text" %>
+      <%= f.file_field :avatar, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Set user info", class: "btn btn-primary btn-twitter rounded-pill" %>
   <% end %>
 </div>
