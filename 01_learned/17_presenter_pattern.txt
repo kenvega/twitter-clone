@@ -1,0 +1,59 @@
+presenter pattern
+
+  add like an extra class
+
+  contains business logic in that class
+
+  the presenter will determine how to present the data on the front end based on that class
+
+
+you can create this in a rails app like this
+
+  create a folder app/presenters
+
+    then you can create files like this app/presenters/tweet_presenter.rb
+
+      with clasess that have methods that can just do the logic that the view has
+
+
+    you can replace this in the view
+
+      <div class="flex-grow-1 ms-3">
+        <% if (Time.zone.now - tweet.created_at) > 1.day %>
+          <p class="mb-0"><span class="fw-bolder"><%= tweet.user.display_name %></span> <span class="text-muted">@<%= tweet.user.username %> · <%= tweet.created_at.strftime("%b %-d") %></span></p>
+        <% else %>
+          <p class="mb-0"><span class="fw-bolder"><%= tweet.user.display_name %></span> <span class="text-muted">@<%= tweet.user.username %> · <%= time_ago_in_words(tweet.created_at) %></span></p>
+        <% end %>
+        <p class="mb-0"><%= tweet.body %></p>
+      </div>
+
+    to a method like this
+
+      <div class="flex-grow-1 ms-3">
+        <p class="mb-0">
+          <span class="fw-bolder"><%= tweet_presenter.display_name %></span>
+          <span class="text-muted">@<%= tweet_presenter.username %> · <%= tweet_presenter.humanized_created_at %></span>
+        </p>
+
+        <p class="mb-0"><%= tweet_presenter.body %></p>
+      </div>
+
+
+  there will likely some methods that you might use in the view that you will not be able to use in the presenter file because the view has the ActionView context included by default so it loads all the helpers that come with it
+
+    for example if in the console you want to use the  method time_ago_in_words that comes from ActionView::Helpers::DateHelper
+
+      you will need to do first in the console include ActionView::Helpers::DateHelper
+
+        and then you will be able to use the method in the console without problems 
+
+        similarly you will need to include that helpers in the class if you want to use view methods in that class
+
+
+  when creating the presenters rails automatically can read where the class is
+
+    for example if you have a line like this
+      <%= render Tweet.order(created_at: :desc).map { |tweet| TweetPresenter.new(tweet) } %>
+
+    rails will look for a class called TweetPresenter
+

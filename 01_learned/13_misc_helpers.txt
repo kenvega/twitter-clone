@@ -5,3 +5,39 @@ helper methods I saw that are not exactly related to controllers, models, etc
     you can get a name from a username
 
       "john_doe".humanize  --> "John doe"
+
+
+ActiveSupport (maybe it should be its own file (?))
+  extends Ruby's core classes with more functionality
+
+  some added methods
+
+    delegate
+
+      coming from the delegation design pattern where one object forwards certain methods to another object
+        it's just a way to simplify code
+
+      it's a way to define delegations without writing manually the code that delegates the methods
+        this reduces boilerplate code
+
+      example: in the context of a User model with a Employee model with a has_one relationship
+        instead of this
+
+          class Employee < ApplicationRecord
+            has_many :tasks
+
+            def name
+              user.name
+            end
+
+            def age
+              user.age
+            end
+          end
+
+        we can just use the shortcut of delegating the methods directly to the user model
+
+          class Employee < ApplicationRecord
+            has_many :tasks
+            delegate :name, :age, to: :user
+          end

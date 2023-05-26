@@ -10,10 +10,10 @@ generally speaking you want to avoid putting logic in your view
 
 an example on a form in a view with erb
 
-<%=form_with model: Tweet.new, url: tweets_path, local: true do |f| %>
+<%= form_with model: Tweet.new, url: tweets_path, local: true do |f| %>
   <%= f.text_field :body %>
   <%= f.submit %>
-<%end%>
+<% end %>
 
 tweets_path is the path where you make your POST requests to create new tweets
   you can also use a GET to this same path to get all tweets
@@ -38,3 +38,51 @@ you can create partials where you see that code is reusable or to make the view 
         <%= render 'shared/sidebar' %>
 
         * notice how the '_' character is not needed when using the partial
+
+to render a partial with extra parameters
+
+  you can use this short form
+
+    <%= render "tweets/tweet", tweet_presenter: tweet_presenter %>
+
+  or this long more detailed form
+
+    <%= render partial: "tweets/tweet", locals: { tweet_presenter: tweet_presenter } %>
+
+  but do not combine them like this or you will get errors hard to debug
+
+    do not do this: <%= render "tweets/tweet", locals: { tweet_presenter: tweet_presenter } %>
+
+to render a mapped partial
+
+  instead of doing this
+    <% Tweet.order(created_at: :desc).each do |tweet| %>
+      <%= render "tweets/tweet", tweet: tweet %>
+    <% end %>
+
+  you can do this
+    <%= render Tweet.order(created_at: :desc) %>
+
+  this is rails using conventions that can simplify the code. in the second case a collection of ActiveRecord objects is passed to render so it:
+    automatically looks for a partial with a name based on the model name. in this case looks for "tweets/_tweet.html.erb" automatically
+      and renders that partial for each object in the collection
+
+    automatically assigns each object to a local variable named after the partial
+
+
+
+  another more complex example
+    instead of doing this
+      <% Tweet.order(created_at: :desc).map { |tweet| TweetPresenter.new(tweet) }.each do |tweet_presenter| %>
+        <%= render "tweets/tweet", tweet_presenter: tweet_presenter %>
+      <% end %>
+
+    you can do this
+
+      <%= render partial: "tweets/tweet", collection: Tweet.order(created_at: :desc).map { |tweet| TweetPresenter.new(tweet) }, as: :tweet_presenter %>
+
+
+
+helpers that only works in a view and not in other files like controllers
+
+  time_ago_in_words -- coming from ActionView::Helpers::DateHelper

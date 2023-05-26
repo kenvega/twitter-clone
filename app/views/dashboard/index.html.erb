@@ -7,15 +7,8 @@
     <%= render 'shared/tweet_form' %>
   </div>
 
-  <%# Tweet.order(created_at: :desc).each do |tweet| %>
-    <%#= render "tweets/tweet", tweet: tweet %>
-  <%# end %>
-
-  <%# this is the same as above %>
-  <%#= render Tweet.order(created_at: :desc) %>
-
   <div id="tweets">
-    <%= render Tweet.order(created_at: :desc) %>
+    <%= render partial: "tweets/tweet", collection: @tweets, as: :tweet_presenter %>
   </div>
 </div>
 

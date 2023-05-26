@@ -54,3 +54,19 @@ an example of how a test can be done
     end
 
 
+if you need to freeze time for your tests to be accurate
+
+  you can use the time helper methods that come built in
+
+  to use them you need to add them to the configuration in the spec/rails_helper.rb
+
+    RSpec.configure do |config|
+      ...
+      config.include ActiveSupport::Testing::TimeHelpers
+    end
+
+    travel_to
+
+    travel_back
+
+    this way you avoid using another gem like time_cop
