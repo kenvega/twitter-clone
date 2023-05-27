@@ -10,7 +10,40 @@
         <span class="text-muted">@<%= tweet_presenter.username %> · <%= tweet_presenter.humanized_created_at %></span>
       </p>
 
-      <p class="mb-0"><%= tweet_presenter.body %></p>
+      <p><%= tweet_presenter.body %></p>
+
+      <div class="d-flex justify-content-between action-links">
+        <div>
+          <%= link_to "#", class: "text-decoration-none text-black views" do %>
+            <%= image_tag "chart.svg", width: "20", class: "me-1" %>
+            <span>Views</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to "#", class: "text-decoration-none text-black replies" do %>
+            <%= image_tag "chat.svg", width: "20", class: "me-1" %>
+            <span>Replies</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to "#", class: "text-decoration-none text-black retweets" do %>
+            <%= image_tag "retweet.svg", width: "20", class: "me-1" %>
+            <span>Retweets</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to "#", class: "text-decoration-none text-black likes" do %>
+            <%= image_tag "heart.svg", width: "20", class: "me-1" %>
+            <span>Likes</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to "#", class: "text-decoration-none text-black bookmark" do %>
+            <%= image_tag "bookmark.svg", width: "20", class: "me-1" %>
+            <span>Bookmark</span>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

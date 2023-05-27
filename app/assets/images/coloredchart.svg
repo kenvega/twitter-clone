@@ -1,0 +1,13 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(0,280) scale(1,-1)">
+        <rect x="50" y="0" width="50" height="100" style="fill:blue;"/>
+        <rect x="150" y="0" width="50" height="150" style="fill:green;"/>
+        <rect x="250" y="0" width="50" height="200" style="fill:red;"/>
+    </g>
+    <g transform="translate(0,280)">
+        <text x="50" y="15" style="fill:black;">Bar 1</text>
+        <text x="150" y="15" style="fill:black;">Bar 2</text>
+        <text x="250" y="15" style="fill:black;">Bar 3</text>
+    </g>
+    <line x1="40" y1="280" x2="300" y2="280" style="stroke:black;"/>
+</svg>
