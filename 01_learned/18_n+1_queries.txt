@@ -1,0 +1,100 @@
+if you have something like this
+
+  SELECT categories.* FROM categories
+
+  SELECT products.* FROM products WHERE products.category_id = 1
+  SELECT products.* FROM products WHERE products.category_id = 2
+  SELECT products.* FROM products WHERE products.category_id = 3
+  SELECT products.* FROM products WHERE products.category_id = 4
+  SELECT products.* FROM products WHERE products.category_id = 5
+
+  you have an N+1 query problem
+
+the queries should be done like this instead
+
+  SELECT categories.* FROM categories
+
+  SELECT products.* FROM products WHERE products.category_id IN (1,2,3,4,5)
+
+
+to detect this issues automatically you can use the gem bullet
+
+  setup of the bullet gem
+
+    in your Gemfile add this in the development enviroment group
+
+      group :development, :test do
+        gem "bullet"
+      end
+
+    then install the gem
+      bundle install
+
+    add the configuration with the generator
+      bundle exec rails g bullet:install
+        if you set the gem in the test group it will also ask if you want to change that config too
+
+      this will add configs related to bullet and its levels of notifications for the app in these files
+        config/environments/development.rb
+        config/environments/test.rb
+
+      example
+        Rails.application.configure do
+          config.after_initialize do
+            Bullet.enable        = true
+            Bullet.alert         = true
+            Bullet.bullet_logger = true
+            Bullet.console       = true
+            Bullet.rails_logger  = true
+            Bullet.add_footer    = true
+          end
+          ...
+        end
+
+      more info can be found here: https://github.com/flyerhzm/bullet#configuration
+
+some examples of warnings (and solutions) coming from bullet (as alerts in the webpage)
+
+  example 1
+    user: ken
+    USE eager loading detected
+    Tweet => [:user]
+    Add to your query: .includes([:user])
+    Call stack
+    /.../twitter-clone/app/presenters/tweet_presenter.rb:14:in `user'
+    /.../twitter-clone/app/presenters/tweet_presenter.rb:16:in `avatar'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb__1807938016359427898_25940'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb__1807938016359427898_25940'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__2773724442013305419_25900'
+
+    solved with
+      Tweet.includes(:user).order(created_at: :desc)
+
+  example 2
+    user: ken
+    USE eager loading detected
+    User => [:avatar_attachment]
+    Add to your query: .includes([:avatar_attachment])
+    Call stack
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb__1185747669266298221_26100'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb__1185747669266298221_26100'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__3692966136732348537_26060'
+
+    solved with
+      Tweet.includes(user: :avatar_attachment).order(created_at: :desc)
+
+  example 3
+    user: ken
+    USE eager loading detected
+    ActiveStorage::Attachment => [:blob]
+    Add to your query: .includes([:blob])
+    Call stack
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb___1153556395896471480_26460'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb___1153556395896471480_26460'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__1358306816733789125_26420'
+
+    solved with
+      Tweet.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
+
+
+
