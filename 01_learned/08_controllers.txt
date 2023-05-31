@@ -31,3 +31,24 @@ you might prefer to create a UsernameController instead of a UserController
 
 
 skip_before_action
+
+action methods in controllers usually do not receive arguments
+
+  they usually can get all the parameters needed to work from the variable called 'params'
+
+  example
+
+    class LikesController < ApplicationController
+      def create
+        current_user.likes.create(tweet: @tweet)
+      end
+
+      private
+
+      def tweet
+        @tweet ||= Tweet.find(params[:tweet_id])
+      end
+    end
+
+    in the example you can see you do not need a method like "create(tweet_id)"
+      and instead you get the tweet_id from the params variable

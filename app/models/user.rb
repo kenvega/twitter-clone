@@ -5,6 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :tweets, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  has_many :liked_tweets, through: :likes, source: :tweet
+  # above line about :liked_tweets could actually be like this:
+  #   "has_many :tweets, through: :likes"
+  # but then "user.tweets" would conflict between the liked tweets and the created tweets by the user
+  # that's why this relation needs a different name ("liked_tweets") and for these cases it needs a source
 
   has_one_attached :avatar
 
