@@ -1,0 +1,44 @@
+counter_cache can be used to reduce the number of COUNT queries
+
+  example trying to reduce the queries to get the number of likes of tweet
+
+    we first create a migration to add to the 'tweets' table a new column that tracks the number of likes
+
+      bundle exec rails g migration add_likes_count_to_tweets likes_counter:integer
+
+    the migration should have an 'up' method where you take into account the number of likes of already existing tweets
+
+      class AddLikesCountToTweets < ActiveRecord::Migration[7.0]
+        def up
+          add_column :tweets, :likes_count, :integer, null: false, default: 0
+
+          Tweet.find_each do |tweet|
+            tweet.update!(likes_count: tweet.likes.size)
+          end
+        end
+
+        def down
+          remove_column :tweets, :likes_count
+        end
+      end
+
+    then run the migration
+
+      bundle exec rails db:migrate db:test:prepare
+
+    then in the like model you will need to add the option counter_cache and the column name that it is targeting
+
+      class Like < ApplicationRecord
+        belongs_to :tweet, counter_cache: :likes_count
+        ...
+      end
+
+    then you can replace your views
+
+      from this
+
+        <span><%= tweet_presenter.likes.size %></span>
+
+      to this
+
+        <span><%= tweet_presenter.likes_count %></span>
