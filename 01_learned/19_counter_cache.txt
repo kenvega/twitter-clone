@@ -39,6 +39,12 @@ counter_cache can be used to reduce the number of COUNT queries
 
         <span><%= tweet_presenter.likes.size %></span>
 
+        before for every tweet in the loop we needed to make a query to count the number of likes records related to that tweet
+
       to this
 
         <span><%= tweet_presenter.likes_count %></span>
+
+        now every tweet record already has the number of likes in the same table which reduces the queries made to the DB
+
+      
