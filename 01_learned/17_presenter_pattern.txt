@@ -49,6 +49,14 @@ you can create this in a rails app like this
 
         similarly you will need to include that helpers in the class if you want to use view methods in that class
 
+    another example is the routing helpers which you can include like this
+
+      include Rails.application.routes.url_helpers
+
+        this makes the presenter have access to method likes tweet_likes_path
+
+        this url_helpers are only included in views and controllers by default but not in presenters
+
 
   when creating the presenters rails automatically can read where the class is
 

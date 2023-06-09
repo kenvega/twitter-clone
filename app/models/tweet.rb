@@ -1,7 +1,8 @@
 class Tweet < ApplicationRecord
   belongs_to :user
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user # TODO: remove this if not used in the end
 
   validates :body, presence: true, length: { maximum: 280 }
 end

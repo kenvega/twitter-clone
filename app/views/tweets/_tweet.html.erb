@@ -32,16 +32,9 @@
           <% end %>
         </div>
         <div>
-          <% if tweet_presenter.likes.include?(current_user.likes.find_by(tweet: tweet_presenter.tweet)) %>
-            <%= link_to tweet_like_path(tweet_presenter.tweet, tweet_presenter.tweet.likes.find_by(user: current_user)), data: { "turbo-method": "delete" } , class: "text-decoration-none text-black likes" do %>
-              <%= image_tag "heart-filled.svg", width: "20", class: "me-1" %>
-              <span><%= tweet_presenter.likes_count %></span>
-            <% end %>
-          <% else %>
-            <%= link_to tweet_likes_path(tweet_presenter.tweet), data: { "turbo-method": "post" } , class: "text-decoration-none text-black likes" do %>
-              <%= image_tag "heart-unfilled.svg", width: "20", class: "me-1" %>
-              <span><%= tweet_presenter.likes_count %></span>
-            <% end %>
+          <%= link_to tweet_presenter.tweet_like_url, data: { "turbo-method": tweet_presenter.turbo_data_method }, class: "text-decoration-none text-black likes" do %>
+            <%= image_tag tweet_presenter.like_heart_image, width: "20", class: "me-1" %>
+            <span><%= tweet_presenter.likes_count %></span>
           <% end %>
         </div>
         <div>

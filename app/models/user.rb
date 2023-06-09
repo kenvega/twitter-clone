@@ -23,4 +23,8 @@ class User < ApplicationRecord
     self.display_name = username.humanize
   end
 
+  def liked_tweet_ids
+    @liked_tweet_ids ||= likes.pluck(:tweet_id)
+  end
+
 end

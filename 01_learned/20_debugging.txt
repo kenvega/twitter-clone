@@ -1,0 +1,15 @@
+when you do ./bin/dev
+
+  foreman is running many processes in one terminal
+
+  and that is not very good at capturing input (needed to debug)
+
+  these resources might help with that
+
+    https://github.com/ruby/debug/issues/603
+
+    https://github.com/ruby/debug/issues/653
+
+    https://github.com/ruby/debug#control-flow
+
+    https://dev.to/ayushn21/remote-debugging-in-rails-7-49nh
