@@ -15,3 +15,9 @@ example on how to add a column with a unique index
   def change
     add_column :users, :username, :string, index: { unique: true }
   end
+
+list of migrations done in this project
+
+  bundle exec rails g model Bookmark user:references tweet:references
+
+  

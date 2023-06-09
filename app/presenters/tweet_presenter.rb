@@ -33,8 +33,24 @@ class TweetPresenter
     end
   end
 
-  def turbo_data_method
+  def tweet_bookmark_url
+    if tweet_bookmarked_by_current_user?
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+    else
+      tweet_bookmarks_path(tweet)
+    end
+  end
+
+  def turbo_like_data_method
     if tweet_liked_by_current_user?
+      "delete"
+    else
+      "post"
+    end
+  end
+
+  def turbo_bookmark_data_method
+    if tweet_bookmarked_by_current_user?
       "delete"
     else
       "post"
@@ -49,6 +65,22 @@ class TweetPresenter
     end
   end
 
+  def bookmark_image
+    if tweet_bookmarked_by_current_user?
+      "bookmark-filled.svg"
+    else
+      "bookmark-unfilled.svg"
+    end
+  end
+
+  def bookmark_text
+    if tweet_bookmarked_by_current_user?
+      "Bookmarked"
+    else
+      "Bookmark"
+    end
+  end
+
   private
 
   def tweet_liked_by_current_user
@@ -58,4 +90,10 @@ class TweetPresenter
   # alias is created because method names ending with question mark cannot be memoized. But it is better to memoize that value in this case
   alias_method :tweet_liked_by_current_user?, :tweet_liked_by_current_user
 
+
+  def tweet_bookmarked_by_current_user
+    @tweet_bookmarked_by_current_user ||= current_user.bookmarked_tweet_ids.include?(tweet.id)
+  end
+
+  alias_method :tweet_bookmarked_by_current_user?, :tweet_bookmarked_by_current_user
 end
