@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
 
+  has_many :retweets, dependent: :destroy
+  has_many :retweeted_tweets, through: :retweets, source: :tweet
+
   has_one_attached :avatar
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
@@ -34,4 +37,7 @@ class User < ApplicationRecord
     @bookmarked_tweet_ids ||= bookmarks.pluck(:tweet_id)
   end
 
+  def retweeted_tweet_ids
+    @retweeted_tweet_ids ||= retweets.pluck(:tweet_id)
+  end
 end

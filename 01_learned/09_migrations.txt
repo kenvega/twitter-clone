@@ -16,8 +16,24 @@ example on how to add a column with a unique index
     add_column :users, :username, :string, index: { unique: true }
   end
 
-list of migrations done in this project
+list of migrations/commands done in this project
+
+  bundle exec rails generate rspec:install
+
+  bundle exec rails generate devise:install
+
+  bundle exec rails g devise user
+
+  bundle exec rails g devise:views
+
+  bundle exec rails g model Tweet user:references body:string
+
+  bundle exec rails g model like tweet:references user:references
+
+  bundle exec rails g migration add_uniqueness_constraint_to_likes
+
+  bundle exec rails g migration add_likes_count_to_tweets likes:integer
 
   bundle exec rails g model Bookmark user:references tweet:references
 
-  
+  bundle exec rails g migration add_retweets_count_to_tweets retweets:integer

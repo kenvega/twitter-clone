@@ -13,7 +13,7 @@ class TweetPresenter
   # tweetPresenter.tweet.user when calling tweetPresenter.user
   # tweetPresenter.tweet.body when calling tweetPresenter.body
   # where tweetPresenter is an instance of TweetPresenter
-  delegate :user, :body, :likes, :likes_count, to: :tweet
+  delegate :user, :body, :likes, :likes_count, :retweets_count, to: :tweet
 
   delegate :display_name, :avatar, :username, to: :user
 
@@ -25,19 +25,12 @@ class TweetPresenter
     end
   end
 
+  # liked tweets methods
   def tweet_like_url
     if tweet_liked_by_current_user?
       tweet_like_path(tweet, current_user.likes.find_by(tweet: tweet))
     else
       tweet_likes_path(tweet)
-    end
-  end
-
-  def tweet_bookmark_url
-    if tweet_bookmarked_by_current_user?
-      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
-    else
-      tweet_bookmarks_path(tweet)
     end
   end
 
@@ -49,19 +42,28 @@ class TweetPresenter
     end
   end
 
-  def turbo_bookmark_data_method
-    if tweet_bookmarked_by_current_user?
-      "delete"
-    else
-      "post"
-    end
-  end
-
   def like_heart_image
     if tweet_liked_by_current_user?
       "heart-filled.svg"
     else
       "heart-unfilled.svg"
+    end
+  end
+
+  # bookmarked tweets methods
+  def tweet_bookmark_url
+    if tweet_bookmarked_by_current_user?
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+    else
+      tweet_bookmarks_path(tweet)
+    end
+  end
+
+  def turbo_bookmark_data_method
+    if tweet_bookmarked_by_current_user?
+      "delete"
+    else
+      "post"
     end
   end
 
@@ -81,6 +83,31 @@ class TweetPresenter
     end
   end
 
+  # retweeted tweets methods
+  def tweet_retweet_url
+    if tweet_retweeted_by_current_user?
+      tweet_retweet_path(tweet, current_user.retweets.find_by(tweet: tweet))
+    else
+      tweet_retweets_path(tweet)
+    end
+  end
+
+  def turbo_retweet_data_method
+    if tweet_retweeted_by_current_user?
+      "delete"
+    else
+      "post"
+    end
+  end
+
+  def retweet_image
+    if tweet_retweeted_by_current_user?
+      "retweet-filled.svg"
+    else
+      "retweet-unfilled.svg"
+    end
+  end
+
   private
 
   def tweet_liked_by_current_user
@@ -96,4 +123,11 @@ class TweetPresenter
   end
 
   alias_method :tweet_bookmarked_by_current_user?, :tweet_bookmarked_by_current_user
+
+
+  def tweet_retweeted_by_current_user
+    @tweet_retweeted_by_current_user ||= current_user.retweeted_tweet_ids.include?(tweet.id)
+  end
+
+  alias_method :tweet_retweeted_by_current_user?, :tweet_retweeted_by_current_user
 end

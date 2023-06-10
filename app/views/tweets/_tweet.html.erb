@@ -26,9 +26,9 @@
           <% end %>
         </div>
         <div>
-          <%= link_to "#", class: "text-decoration-none text-black retweets" do %>
-            <%= image_tag "retweet-unfilled.svg", width: "20", class: "me-1" %>
-            <span>Retweets</span>
+          <%= link_to tweet_presenter.tweet_retweet_url, data: { "turbo-method": tweet_presenter.turbo_retweet_data_method }, class: "text-decoration-none text-black retweets" do %>
+            <%= image_tag tweet_presenter.retweet_image, width: "20", class: "me-1" %>
+            <span><%= tweet_presenter.retweets_count %></span>
           <% end %>
         </div>
         <div>
