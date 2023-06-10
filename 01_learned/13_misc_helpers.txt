@@ -6,6 +6,20 @@ helper methods I saw that are not exactly related to controllers, models, etc
 
       "john_doe".humanize  --> "John doe"
 
+  .strftime
+
+    you can format time with this
+
+    example
+
+      <p><%= tweet.created_at.strftime("%l:%M %p") %> · <%= tweet.created_at.strftime("%b %d, %Y") %></p>
+
+      will generate something like this
+        4:59 AM • Jun 09, 2023
+
+    options to format are here https://apidock.com/ruby/DateTime/strftime
+
+
 
 ActiveSupport (maybe it should be its own file (?))
   extends Ruby's core classes with more functionality
