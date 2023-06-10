@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(tweet_presenter.tweet) do %>
-  <div class="tweet d-flex py-3 px-3">
+  <div data-controller="tweet-card" data-tweet-path="<%= tweet_path(tweet_presenter.tweet) %>" class="tweet d-flex py-3 px-3">
     <div class="flex-shrink-0">
       <%= image_tag tweet_presenter.avatar, size: "48x48", class: "rounded-circle" %>
     </div>
@@ -14,31 +14,31 @@
 
       <div class="d-flex justify-content-between action-links">
         <div>
-          <%= link_to "#", class: "text-decoration-none text-black views" do %>
+          <%= link_to "#", data: { "ignore-click": true }, class: "text-decoration-none text-black views" do %>
             <%= image_tag "chart.svg", width: "20", class: "me-1" %>
             <span>Views</span>
           <% end %>
         </div>
         <div>
-          <%= link_to "#", class: "text-decoration-none text-black replies" do %>
+          <%= link_to tweet_path(tweet_presenter.tweet), data: { "ignore-click": true }, class: "text-decoration-none text-black replies" do %>
             <%= image_tag "chat.svg", width: "20", class: "me-1" %>
             <span>Replies</span>
           <% end %>
         </div>
         <div>
-          <%= link_to tweet_presenter.tweet_retweet_url, data: { "turbo-method": tweet_presenter.turbo_retweet_data_method }, class: "text-decoration-none text-black retweets" do %>
+          <%= link_to tweet_presenter.tweet_retweet_url, data: { "ignore-click": true, "turbo-method": tweet_presenter.turbo_retweet_data_method }, class: "text-decoration-none text-black retweets" do %>
             <%= image_tag tweet_presenter.retweet_image, width: "20", class: "me-1" %>
             <span><%= tweet_presenter.retweets_count %></span>
           <% end %>
         </div>
         <div>
-          <%= link_to tweet_presenter.tweet_like_url, data: { "turbo-method": tweet_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
+          <%= link_to tweet_presenter.tweet_like_url, data: { "ignore-click": true, "turbo-method": tweet_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
             <%= image_tag tweet_presenter.like_heart_image, width: "20", class: "me-1" %>
             <span><%= tweet_presenter.likes_count %></span>
           <% end %>
         </div>
         <div>
-          <%= link_to tweet_presenter.tweet_bookmark_url, data: { "turbo-method": tweet_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
+          <%= link_to tweet_presenter.tweet_bookmark_url, data: { "ignore-click": true, "turbo-method": tweet_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
             <%= image_tag tweet_presenter.bookmark_image, width: "20", class: "me-1" %>
             <span><%= tweet_presenter.bookmark_text %></span>
           <% end %>

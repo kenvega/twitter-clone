@@ -37,3 +37,5 @@ list of migrations/commands done in this project
   bundle exec rails g model Bookmark user:references tweet:references
 
   bundle exec rails g migration add_retweets_count_to_tweets retweets:integer
+
+  bundle exec rails g stimulus tweet_card
