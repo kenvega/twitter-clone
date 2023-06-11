@@ -32,10 +32,22 @@ list of migrations/commands done in this project
 
   bundle exec rails g migration add_uniqueness_constraint_to_likes
 
-  bundle exec rails g migration add_likes_count_to_tweets likes:integer
+  bundle exec rails g migration add_likes_count_to_tweets likes_count:integer
 
   bundle exec rails g model Bookmark user:references tweet:references
 
-  bundle exec rails g migration add_retweets_count_to_tweets retweets:integer
+  bundle exec rails g migration add_retweets_count_to_tweets retweets_count:integer
 
   bundle exec rails g stimulus tweet_card
+
+  bundle exec rails g model View user:references tweet:references
+
+  bundle exec rails g migration add_views_count_to_tweets views_count:integer
+    # learned here that the migration file and its class name can change after you generate them. no problem from rails
+        issue here is that first it was called viewed_count instead of views_count
+          then a rollback was made and then the file name, the column name and the class name of the migration were changed
+            no problems from rails were created from this
+              I thought when using generators somehow the records of the rails app were locked to certain names that couldn't be changed later  
+                (there are so many files in the rails app so I thought something like that might happen)
+
+

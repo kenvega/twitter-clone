@@ -12,6 +12,9 @@ RSpec.describe User, type: :model do
   it { should have_many(:retweets).dependent(:destroy)}
   it { should have_many(:retweeted_tweets).through(:retweets).source(:tweet) }
 
+  it { should have_many(:views) } # if the user is deleted the views still count
+  it { should have_many(:viewed_tweets).through(:views).source(:tweet) }
+
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
   describe "#set_display_name" do

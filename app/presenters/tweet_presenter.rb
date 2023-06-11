@@ -13,7 +13,7 @@ class TweetPresenter
   # tweetPresenter.tweet.user when calling tweetPresenter.user
   # tweetPresenter.tweet.body when calling tweetPresenter.body
   # where tweetPresenter is an instance of TweetPresenter
-  delegate :user, :body, :likes, :likes_count, :retweets_count, to: :tweet
+  delegate :user, :body, :likes, :likes_count, :retweets_count, :views_count, to: :tweet
 
   delegate :display_name, :avatar, :username, to: :user
 
