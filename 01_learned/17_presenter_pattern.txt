@@ -57,6 +57,13 @@ you can create this in a rails app like this
 
         this url_helpers are only included in views and controllers by default but not in presenters
 
+    another is the paths to assets
+      you will need to do something like this in the presenter so that it works
+        ActionController::Base.helpers.asset_path("profile.svg")
+
+        because
+          asset_path("profile.svg")
+            alone will fail
 
   when creating the presenters rails automatically can read where the class is
 

@@ -25,12 +25,18 @@ class TweetPresenter
     end
   end
 
+  def avatar
+    return user.avatar if user.avatar.present?
+
+    ActionController::Base.helpers.asset_path("profile.svg")
+  end
+
   # liked tweets methods
-  def tweet_like_url
+  def tweet_like_url(source: "tweet_card")
     if tweet_liked_by_current_user?
-      tweet_like_path(tweet, current_user.likes.find_by(tweet: tweet))
+      tweet_like_path(tweet, current_user.likes.find_by(tweet: tweet), source: source)
     else
-      tweet_likes_path(tweet)
+      tweet_likes_path(tweet, source: source)
     end
   end
 
@@ -51,11 +57,11 @@ class TweetPresenter
   end
 
   # bookmarked tweets methods
-  def tweet_bookmark_url
+  def tweet_bookmark_url(source: "tweet_card")
     if tweet_bookmarked_by_current_user?
-      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet), source: source)
     else
-      tweet_bookmarks_path(tweet)
+      tweet_bookmarks_path(tweet, source: source)
     end
   end
 
@@ -84,11 +90,11 @@ class TweetPresenter
   end
 
   # retweeted tweets methods
-  def tweet_retweet_url
+  def tweet_retweet_url(source: "tweet_card")
     if tweet_retweeted_by_current_user?
-      tweet_retweet_path(tweet, current_user.retweets.find_by(tweet: tweet))
+      tweet_retweet_path(tweet, current_user.retweets.find_by(tweet: tweet), source: source)
     else
-      tweet_retweets_path(tweet)
+      tweet_retweets_path(tweet, source: source)
     end
   end
 
