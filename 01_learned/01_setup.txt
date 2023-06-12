@@ -13,6 +13,11 @@ how to run the app
     ./bin/dev
       this will start the rails server and also will make sass and bootstrap to work
 
+  for background jobs to run (for example to update the views when showing a single tweet)
+    in another terminal run
+      bundle exec rails jobs:work
+        this runs the workers that pick the queued jobs in the delayed_jobs table
+
 ===
 
 command I used to create this rails project
