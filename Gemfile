@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.1"
 gem "bootsnap", require: false
 gem "cssbundling-rails"
+gem "delayed_job_active_record"
 gem "devise"
 gem "jbuilder"
 gem "jsbundling-rails"

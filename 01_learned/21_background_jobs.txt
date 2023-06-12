@@ -1,0 +1,81 @@
+a background job can be used when an action in a controller is doing something more than its regular responsability
+
+  for example if when viewing a tweet the tweets#show action needs to increment the views of that tweet and also render the tweet page
+
+    then the increment can be moved to a background job
+
+gems that can help with background jobs
+
+  resque
+
+  sidekiq - most popular in real world applications. uses redis which is faster
+
+  delayed_jobs - does not need redis. might be useful for beginners who don't know how to setup redis but want to learn background jobs
+
+  sucker_punch
+
+setup delayed_jobs
+
+  add to the Gemfile
+
+    gem "delayed_job_active_record"
+
+  then run the command
+
+    bundle
+    OR
+    bundle install
+
+  run the generators
+
+    bundle exec rails generate delayed_job:active_record
+
+      create  bin/delayed_job
+      chmod   bin/delayed_job
+      create  db/migrate/20230611055305_create_delayed_jobs.rb
+
+    this creates a migration which creates a table called delayed_jobs where the background jobs will be stored
+
+  run the migration created
+
+    bundle exec rails db:migrate db:test:prepare
+
+  change the rails configuration so that it works with active job
+
+    in the file config/application.rb add the config line
+
+      module TwitterClone
+        class Application < Rails::Application
+          ...
+          config.generators.system_tests = nil
+          config.active_job.queue_adapter = :delayed_job # ADD THIS LINE to your config file
+        end
+      end
+
+  then to run the background jobs you need to open a new terminal and run this command  
+
+    bundle exec rails jobs:work
+
+      this will run the workers that pick the queued jobs in the delayed_jobs table and then run those jobs in the background
+
+  with that you can have the setup complete and can create jobs to be run in background
+
+creating jobs with delayed_jobs
+
+  you can create jobs with a command like this
+
+    bundle exec rails g job view_tweet
+
+      invoke  rspec
+      create    spec/jobs/view_tweet_job_spec.rb
+      create  app/jobs/view_tweet_job.rb
+
+
+    this creates a job file in which you can put the logic you want to be run in the background in the perform method
+
+
+  then you can call that job where you were before doing that logic like this
+
+    ViewTweetJob.perform_later(tweet: tweet, user: current_user)
+
+

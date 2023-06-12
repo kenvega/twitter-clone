@@ -7,6 +7,10 @@ RSpec.describe "Tweets", type: :request do
     let(:tweet) { create(:tweet) }
 
     before { sign_in user }
+    before do
+      sign_in user
+      allow(ViewTweetJob).to receive(:perform_later)
+    end
 
     it "succeeds" do
       get tweet_path(tweet)
@@ -14,13 +18,10 @@ RSpec.describe "Tweets", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it "increments the view count if tweet has not been viewed" do
-      expect { get tweet_path(tweet) }.to change { View.count }.by(1)
-    end
+    it "queues the ViewTweetJob" do
+      get tweet_path(tweet)
 
-    it "does not increment the view count if the tweet already has been viewed" do
-      create(:view, user: user, tweet: tweet)
-      expect { get tweet_path(tweet) }.not_to change { View.count }
+      expect(ViewTweetJob).to have_received(:perform_later).with(user: user, tweet: tweet)
     end
   end
 

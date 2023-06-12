@@ -70,3 +70,14 @@ if you need to freeze time for your tests to be accurate
     travel_back
 
     this way you avoid using another gem like time_cop
+
+stubs
+
+  sometimes you will need to do tests that might work with other dependencies
+
+    for example background jobs
+
+      to avoid this complexity you can replace the methods from other dependencies with something called stubs
+
+      this way you can isolate the code you are testing from other dependencies
+
