@@ -13,7 +13,7 @@ class Tweet < ApplicationRecord
   has_many :views, dependent: :destroy
   has_many :viewed_users, through: :views, source: :user
 
-  belongs_to :parent_tweet, foreign_key: :parent_tweet_id, class_name: "Tweet", inverse_of: :reply_tweets, optional: true
+  belongs_to :parent_tweet, foreign_key: :parent_tweet_id, class_name: "Tweet", inverse_of: :reply_tweets, optional: true, counter_cache: :reply_tweets_count
   has_many :reply_tweets, foreign_key: :parent_tweet_id, class_name: "Tweet", inverse_of: :parent_tweet
 
   validates :body, presence: true, length: { maximum: 280 }

@@ -22,7 +22,7 @@
         <div>
           <%= link_to tweet_path(tweet_presenter.tweet), data: { "ignore-click": true }, class: "text-decoration-none text-black replies" do %>
             <%= image_tag "chat.svg", width: "20", class: "me-1" %>
-            <span>Replies</span>
+            <span><%= tweet_presenter.reply_tweets_count %></span>
           <% end %>
         </div>
         <div>
