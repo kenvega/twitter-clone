@@ -13,3 +13,9 @@ when you do ./bin/dev
     https://github.com/ruby/debug#control-flow
 
     https://dev.to/ayushn21/remote-debugging-in-rails-7-49nh
+
+but if you run your tests you can do a binding.pry
+
+  then run the tests and they will stop where you needed them to stop
+
+    could be useful too

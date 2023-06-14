@@ -53,6 +53,8 @@ to render a partial with extra parameters
 
     do not do this: <%= render "tweets/tweet", locals: { tweet_presenter: tweet_presenter } %>
 
+  passing extra parameters to the partials allows you to use those variables in it (just use the same name no prefix needed)
+
 to render a mapped partial
 
   instead of doing this

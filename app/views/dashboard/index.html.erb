@@ -4,7 +4,7 @@
   </div>
 
   <div class="mb-4">
-    <%= render 'shared/tweet_form' %>
+    <%= render "shared/tweet_form", form_submit_path: tweets_path, button_label: "Tweet" %>
   </div>
 
   <div id="tweets">
