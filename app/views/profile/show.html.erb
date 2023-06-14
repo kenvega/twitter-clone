@@ -19,29 +19,7 @@
       <div><%= button_tag "Edit Profile", data: { "bs-toggle": "modal", "bs-target": "#profile-edit-modal" }, class: "btn btn-twitter-outline rounded-pill" %></div>
     </div>
 
-    <div>
-      <p class="fs-3 fw-semibold mb-0"><%= current_user.username %></p>
-      <p class="text-muted">@<%= current_user.display_name %></p>
-      <p><%= current_user.bio %></p>
-      <div class="d-flex justify-content-start mb-3">
-        <div class="me-4">
-          <%= image_tag "location.svg", size: "23x23", class: "me-1" %>
-          <span class="text-muted">Location</span>
-        </div>
-        <div class="me-4">
-          <%= image_tag "link.svg", size: "23x23", class: "me-1" %>
-          <span class="text-muted">URL</span>
-        </div>
-        <div class="me-4">
-          <%= image_tag "calendar.svg", size: "23x23", class: "me-1" %>
-          <span class="text-muted">Join Date</span>
-        </div>
-      </div>
-      <div class="d-flex justify-content-start">
-        <div class="me-4"><span class="fw-semibold">14</span> Following</div>
-        <div><span class="fw-semibold">35</span> Followers</div>
-      </div>
-    </div>
+    <%= render "profile_section" %>
   </div>
 </div>
 
@@ -52,11 +30,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
-        <button type="button" class="btn-close mx-0" data-bs-dismiss="modal" aria-label="Close" id="close-modal-btn">
+        <button type="button" class="btn-close close-modal-btn mx-0" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with model: current_user, url: profile_path, method: :put, local: true, class: "row g-3" do |f| %>
+        <%= form_with model: current_user, url: profile_path, data: { controller: "tweet-form" }, method: :put, class: "row g-3" do |f| %>
           <div class="col-md-12">
             <%= f.label :username, class: "form-label" %>
             <%= f.text_field :username, class: "form-control" %>
