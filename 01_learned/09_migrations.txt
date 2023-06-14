@@ -50,4 +50,7 @@ list of migrations/commands done in this project
               I thought when using generators somehow the records of the rails app were locked to certain names that couldn't be changed later  
                 (there are so many files in the rails app so I thought something like that might happen)
 
+  bundle exec rails g migration add_parent_tweet_id_to_tweets tweet_id:bigint
+    notice we add a tweet_id as bigint to be consistent with the tweet_id that is already in our tables (is bigint/int8 already)
+
 
