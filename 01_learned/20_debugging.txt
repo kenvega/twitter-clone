@@ -1,20 +1,31 @@
 when you do ./bin/dev
 
+  when debugging set a binding.pry in the code
+
+    and then try to run the method '.errors' on objects you think something went wrong
+
+      user.errors
+      current_user.errors
+
+    once you finish put this command to return to normal mode without killing the processes
+
+      exit
+
   foreman is running many processes in one terminal
 
-  and that is not very good at capturing input (needed to debug)
+    and that is not very good at capturing input (needed to debug)
 
-  these resources might help with that
+    these resources might help with that
 
-    https://github.com/ruby/debug/issues/603
+      https://github.com/ruby/debug/issues/603
 
-    https://github.com/ruby/debug/issues/653
+      https://github.com/ruby/debug/issues/653
 
-    https://github.com/ruby/debug#control-flow
+      https://github.com/ruby/debug#control-flow
 
-    https://dev.to/ayushn21/remote-debugging-in-rails-7-49nh
+      https://dev.to/ayushn21/remote-debugging-in-rails-7-49nh
 
-but if you run your tests you can do a binding.pry
+f you run your tests you can also do a binding.pry
 
   then run the tests and they will stop where you needed them to stop
 

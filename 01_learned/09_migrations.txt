@@ -53,4 +53,12 @@ list of migrations/commands done in this project
   bundle exec rails g migration add_parent_tweet_id_to_tweets tweet_id:bigint
     notice we add a tweet_id as bigint to be consistent with the tweet_id that is already in our tables (is bigint/int8 already)
 
+  bundle exec rails g migration add_bio_to_users bio:text
+    in larger apps bio should be added to another table called profiles
+      this way the core user data can be accessed quicker and the less frequently accessed potentially larger profile data stays also organized
+        querying the user data this way will be faster
+
+  bundle exec rails g migration add_location_to_users location:string
+  bundle exec rails g migration add_location_to_users bio:string
+  bundle exec rails g migration add_url_to_users url:string
 

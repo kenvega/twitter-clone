@@ -42,7 +42,7 @@
   <% end %>
 
   <div class="d-flex align-items-center fs-4 px-4 mb-3">
-    <%= button_tag "Tweet", class: "btn btn-lg w-100 rounded-pill btn-twitter", data: { "bs-toggle": "modal", "bs-target": "#exampleModal" } %>
+    <%= button_tag "Tweet", class: "btn btn-lg w-100 rounded-pill btn-twitter", data: { "bs-toggle": "modal", "bs-target": "#tweet-modal" } %>
   </div>
 
   <div class="d-flex align-items-center fs-6 px-4">
@@ -51,8 +51,8 @@
 
 </aside>
 
-<!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Tweet Form Modal in sidebar -->
+<div class="modal" id="tweet-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
