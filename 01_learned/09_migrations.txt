@@ -16,6 +16,17 @@ example on how to add a column with a unique index
     add_column :users, :username, :string, index: { unique: true }
   end
 
+t.index
+
+  # add unique index because user cannot follow the same person twice
+  t.index [:follower_id, :followed_id], unique: true
+
+t.references
+
+  it also adds columns to the table just like t.integer or t.string
+
+  but apart from adding a column it also adds a foreign key
+
 list of migrations/commands done in this project
 
   bundle exec rails generate rspec:install
@@ -62,3 +73,4 @@ list of migrations/commands done in this project
   bundle exec rails g migration add_location_to_users bio:string
   bundle exec rails g migration add_url_to_users url:string
 
+  bundle exec rails g model Follow follower:references followed:references

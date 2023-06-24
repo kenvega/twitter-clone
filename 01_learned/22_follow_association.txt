@@ -1,0 +1,43 @@
+The Follow model was very new and complex to me to make a single file about it
+Mainly because I also don't get english very well so I needed association names that really explained to me what was happening.
+After searching for how to make things work with the names I wanted I ended up with files like these:
+
+# migration
+class CreateFollows < ActiveRecord::Migration[7.0]
+  def change
+    create_table :follows do |t|
+      t.references :follower, null: false, foreign_key: { to_table: :users }
+      t.references :followed, null: false, foreign_key: { to_table: :users }
+
+      # add unique index because user cannot follow the same person twice
+      t.index [:follower_id, :followed_id], unique: true
+
+      t.timestamps
+    end
+  end
+end
+
+# follow model
+class Follow < ApplicationRecord
+  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: "User"
+end
+
+# user model
+class User < ApplicationRecord
+  ...
+  has_many :given_follows, foreign_key: :follower_id, class_name: "Follow" # represents all the Follow instances where the user instance is the follower.
+  has_many :followed_users, through: :given_follows, source: :followed # represents the users that the user instance is following.
+
+  has_many :received_follows, foreign_key: :followed_id, class_name: "Follow" # represents all the Follow instances where the user is followed.
+  has_many :followers, through: :received_follows, source: :follower # represents the users that a user is being followed by
+  ...
+end
+
+# and for the user test
+  ...
+  it { should have_many(:given_follows).with_foreign_key(:follower_id).class_name("Follow") }
+  it { should have_many(:followed_users).through(:given_follows).source(:followed) }
+  it { should have_many(:received_follows).with_foreign_key(:followed_id).class_name("Follow") }
+  it { should have_many(:followers).through(:received_follows).source(:follower) }
+  ...

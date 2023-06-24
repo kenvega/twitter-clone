@@ -15,6 +15,11 @@ RSpec.describe User, type: :model do
   it { should have_many(:views) } # if the user is deleted the views still count
   it { should have_many(:viewed_tweets).through(:views).source(:tweet) }
 
+  it { should have_many(:given_follows).with_foreign_key(:follower_id).class_name("Follow") }
+  it { should have_many(:followed_users).through(:given_follows).source(:followed) }
+  it { should have_many(:received_follows).with_foreign_key(:followed_id).class_name("Follow") }
+  it { should have_many(:followers).through(:received_follows).source(:follower) }
+
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
   describe "#set_display_name" do
