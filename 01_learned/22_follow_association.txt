@@ -41,3 +41,24 @@ end
   it { should have_many(:received_follows).with_foreign_key(:followed_id).class_name("Follow") }
   it { should have_many(:followers).through(:received_follows).source(:follower) }
   ...
+
+
+
+The naming changed from the tutorial to what I did in the end. This table helps as a reference to that change
+
+| original                                                           | my way                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------ |
+| table name: followings                                             | table name: follows                                          |
+|                                                                    |                                                              |
+| model Following                                                    | model Follow                                                 |
+| field representing the user who follows is 'user_id'               | field representing the user who follows is 'follower_id'     |
+| field representing the user who is followed is 'following_user_id' | field representing the user who is followed is 'followed_id' |
+|                                                                    |                                                              |
+| # user relationships                                               | # user relationships                                         |
+| user.followings                                                    | user.given_follows                                           |
+| user.following_users                                               | user.followed_users                                          |
+| user.reverse_followings                                            | user.received_follows                                        |
+| user.followers                                                     | user.followers                                               |
+|                                                                    |                                                              |
+|                                                                    |                                                              |
+|                                                                    |                                                              |

@@ -6,6 +6,12 @@ if you want to filter the routes for a specific controller
 
   bundle exec rails routes -c usernames # where c means controller
 
+  other ways to filter routes (no way to filter default routes from user created routes)
+
+    bundle exec rails routes | grep -E '(products|orders)'
+    bundle exec rails routes | grep api
+
+
 you can check more options at
 
   bundle exec rails routes --help
@@ -35,4 +41,33 @@ you can set only methods to create a few routes
     GET /usersnames/new --- which will go to controller#action -> usernames#new
     PATCH /usernames/:id --- usernames#update
     PUT /usernames/:id --- usernames#update
+
+
+nested routes
+
+  this single line
+    resources :users, only: :show
+
+  generates this route
+
+    | Prefix | Verb | URI Pattern | Controller#Action |
+    | ------ | ---- | ----------- | ----------------- |
+    | user   | GET  | /users/:id  | users#show        |
+    |        |      |             |                   |
+
+  but if you nest it with another resource
+    resources :users, only: :show do
+      resources :followings, only: [:update, :destroy]
+    end
+
+  it generates the other necessary routes under the same base route you defined before
+
+    | Prefix         | Verb   | URI Pattern                    | Controller#Action  |
+    | -------------- | ------ | ------------------------------ | ------------------ |
+    | user           | GET    | /users/:id                     | users#show         |
+    |                |        |                                |                    |
+    | user_following | PATCH  | /users/:user_id/followings/:id | followings#update  |
+    |                | PUT    | /users/:user_id/followings/:id | followings#update  |
+    |                | DELETE | /users/:user_id/followings/:id | followings#destroy |
+    |                |        |                                |                    |
 
