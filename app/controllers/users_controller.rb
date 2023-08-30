@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = User.find(params[:id])
+    # redirect to profile path if user to show is currently logged in user
+    redirect_to profile_path if params[:id].to_i == current_user.id
+
+    @current_profile_user = User.find(params[:id])
   end
 end

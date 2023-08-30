@@ -18,7 +18,13 @@ Rails.application.routes.draw do
 
   resources :usernames, only: [:new, :update]
 
-  resources :users, only: :show do
-    resources :follows, only: [:create, :destroy]
-  end
+  # this was used before but I read that nested routes are most fit for parent child relationships
+  # resources :users, only: :show do
+  #   resources :follows, only: [:create, :destroy]
+  # end
+
+  resources :users, only: :show
+
+  post '/users/:follower_id/follows/:followed_id', to: "follows#create", as: :create_follow
+  delete '/follows/:id', to: "follows#destroy", as: :delete_follow
 end

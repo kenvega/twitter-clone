@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "follow-unfollow-button" do %>
+  <% if followed.followers.include?(follower) %>
+    <%= link_to "Unfollow", delete_follow_path(id: follower.given_follows.find_by(followed_id: followed)), data: { "turbo-method": :delete }, class: "btn btn-twitter-outline rounded-pill"  %>
+  <% else %>
+    <%= link_to "Follow", create_follow_path(follower_id: follower, followed_id: followed), data: { "turbo-method": :post }, class: "btn btn-twitter-outline rounded-pill"  %>
+  <% end %>
+<% end %>

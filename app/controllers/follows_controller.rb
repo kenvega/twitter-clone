@@ -1,26 +1,38 @@
 class FollowsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_follower_and_followed, only: [:create, :destroy]
 
   def create
-    follow = user.given_follows.create(follow_params)
+    follow = @follower.given_follows.create(follow_params)
 
-    redirect_to user_path(User.find(follow_params[:followed_id]))
+    respond_to do |format|
+      format.html do
+        redirect_to user_path(follow.followed)
+      end
+
+      format.turbo_stream
+    end
   end
 
   def destroy
     follow = Follow.find(params[:id])
     follow.destroy
 
-    redirect_to user_path(User.find(follow.followed_id))
+    respond_to do |format|
+      format.html { redirect_to user_path(follow.followed) }
+
+      format.turbo_stream
+    end
   end
 
   private
 
-  def user
-    @user ||= User.find(params[:user_id])
+  def set_follower_and_followed
+    @followed ||= params[:followed_id] ? User.find(params[:followed_id]) : Follow.find(params[:id]).followed
+    @follower ||= params[:follower_id] ? User.find(params[:follower_id]) : Follow.find(params[:id]).follower
   end
 
   def follow_params
-    params.permit(:followed_id)
+    params.permit(:id, :follower_id, :followed_id)
   end
 end

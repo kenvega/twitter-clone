@@ -25,8 +25,14 @@ when you do ./bin/dev
 
       https://dev.to/ayushn21/remote-debugging-in-rails-7-49nh
 
-f you run your tests you can also do a binding.pry
+if you run your tests you can also do a binding.pry
 
   then run the tests and they will stop where you needed them to stop
 
     could be useful too
+
+if you want to debug values in a view you can do this
+
+  put a <% raise %> in the view
+
+    this will generate an error in the view and you will get a console in the webpage below where you can test your values

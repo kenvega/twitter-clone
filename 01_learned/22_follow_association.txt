@@ -60,5 +60,7 @@ The naming changed from the tutorial to what I did in the end. This table helps 
 | user.reverse_followings                                            | user.received_follows                                        |
 | user.followers                                                     | user.followers                                               |
 |                                                                    |                                                              |
-|                                                                    |                                                              |
+| # follow relationships                                             | # follow relationships                                       |
+| follow.user                                                        | follow.follower                                              |
+| follow.following_user                                              | follow.followed                                              |
 |                                                                    |                                                              |

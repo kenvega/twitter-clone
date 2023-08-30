@@ -9,9 +9,7 @@ RSpec.describe "Follows", type: :request do
   describe "POST create" do
     it "creates a new following" do
       expect do
-        post user_follows_path(user_1), params: {
-          followed_id: user_2.id
-        }
+        post create_follow_path(follower_id: user_1.id, followed_id: user_2.id)
       end.to change { Follow.count }.by(1)
 
       expect(response).to redirect_to user_path(user_2)
@@ -23,7 +21,7 @@ RSpec.describe "Follows", type: :request do
       follow = create(:follow, follower: user_1, followed: user_2)
 
       expect do
-        delete user_follow_path(user_1, follow)
+        delete delete_follow_path(id: follow.id)
       end.to change { Follow.count }.by(-1)
 
       expect(response).to redirect_to user_path(user_2)

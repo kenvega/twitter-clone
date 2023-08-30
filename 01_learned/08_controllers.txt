@@ -32,6 +32,24 @@ you might prefer to create a UsernameController instead of a UserController
 
 skip_before_action
 
+methods defined in controllers cannot be used in their related views by default (and probably they should not be)
+
+  if you want to use a method from your controller in your view you will need to do something like this:
+
+    example:
+
+      class UsersController < ApplicationController
+        helper_method :my_method
+
+        def my_method
+          # ...
+        end
+
+        ...
+      end
+
+      then you can use the method 'my_method' inside the related views of the user controller
+
 action methods in controllers usually do not receive arguments
 
   they usually can get all the parameters needed to work from the variable called 'params'
@@ -50,5 +68,5 @@ action methods in controllers usually do not receive arguments
       end
     end
 
-    in the example you can see you do not need a method like "create(tweet_id)"
+    in the example you can see you do not create a method like "create(tweet_id)"
       and instead you get the tweet_id from the params variable

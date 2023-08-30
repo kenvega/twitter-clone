@@ -11,6 +11,13 @@ if you want to filter the routes for a specific controller
     bundle exec rails routes | grep -E '(products|orders)'
     bundle exec rails routes | grep api
 
+if you want to test routes in rails console you will need to import them first
+
+  apply this command to import them
+
+    include Rails.application.routes.url_helpers
+
+      then you will be able to use methods like users_path(user_1)
 
 you can check more options at
 

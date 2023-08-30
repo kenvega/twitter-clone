@@ -2,7 +2,6 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
 
   def show
-
   end
 
   def update
@@ -18,5 +17,4 @@ class ProfileController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :display_name, :email, :password, :bio, :location, :url)
   end
-
 end
