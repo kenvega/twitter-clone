@@ -1,6 +1,6 @@
 counter_cache can be used to reduce the number of COUNT queries
 
-  example trying to reduce the queries to get the number of likes of tweet
+  example trying to reduce the queries to get the number of likes of a tweet (where Like and Tweet are both models in your app)
 
     we first create a migration to add to the 'tweets' table a new column that tracks the number of likes
 

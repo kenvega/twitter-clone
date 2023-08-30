@@ -1,3 +1,7 @@
 <%= turbo_stream.replace "follow-unfollow-button" do %>
   <%= render partial: "users/follow_button", locals: { followed: @followed, follower: @follower } %>
 <% end %>
+
+<%= turbo_stream.replace "profile-section" do %>
+  <%= render partial: "profile/profile_section", locals: { user: @followed.reload } %>
+<% end %>
