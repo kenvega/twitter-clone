@@ -16,59 +16,65 @@
           <%= image_tag "profile.svg", class: "rounded-circle", size: "150x150" %>
         <% end %>
       </div>
-      <%= render "follow_button", follower: current_user, followed: @current_profile_user %>
+      <% if controller_name == "profile" %>
+        <div><%= button_tag "Edit Profile", data: { "bs-toggle": "modal", "bs-target": "#profile-edit-modal" }, class: "btn btn-twitter-outline rounded-pill" %></div>
+      <% else %>
+        <%= render "users/follow_button", follower: current_user, followed: @current_profile_user %>
+      <% end %>
     </div>
 
-    <%= render "profile/profile_section", user: @current_profile_user %>
+    <%= render "users/profile_section", user: @current_profile_user %>
   </div>
 </div>
 
 <div class="col">Search Bar / Trending / Who to follow</div>
 
-<!-- Tweet Form Modal in sidebar -->
-<div class="modal" id="profile-edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="btn-close close-modal-btn mx-0" data-bs-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= form_with model: current_user, url: profile_path, data: { controller: "tweet-form" }, method: :put, class: "row g-3" do |f| %>
-          <div class="col-md-12">
-            <%= f.label :username, class: "form-label" %>
-            <%= f.text_field :username, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :display_name, class: "form-label" %>
-            <%= f.text_field :display_name, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :email, class: "form-label" %>
-            <%= f.email_field :email, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :password, class: "form-label" %>
-            <%= f.password_field :password, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :bio, class: "form-label" %>
-            <%= f.text_area :bio, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :location, class: "form-label" %>
-            <%= f.text_field :location, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :profile_url, class: "form-label" %>
-            <%= f.text_field :profile_url, class: "form-control" %>
-          </div>
+<% if controller_name == "profile" %>
+  <!-- Tweet Form Modal in sidebar -->
+  <div class="modal" id="profile-edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="btn-close close-modal-btn mx-0" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_with model: current_user, url: profile_path, data: { controller: "tweet-form" }, method: :put, class: "row g-3" do |f| %>
+            <div class="col-md-12">
+              <%= f.label :username, class: "form-label" %>
+              <%= f.text_field :username, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :display_name, class: "form-label" %>
+              <%= f.text_field :display_name, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :email, class: "form-label" %>
+              <%= f.email_field :email, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :password, class: "form-label" %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :bio, class: "form-label" %>
+              <%= f.text_area :bio, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :location, class: "form-label" %>
+              <%= f.text_field :location, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :profile_url, "URL", class: "form-label" %>
+              <%= f.text_field :profile_url, class: "form-control" %>
+            </div>
 
-          <div class="col-12">
-            <%= f.submit "Update Profile", class: "btn btn-twitter rounded-pill" %>
-          </div>
-        <% end %>
+            <div class="col-12">
+              <%= f.submit "Update Profile", class: "btn btn-twitter rounded-pill" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
