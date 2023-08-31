@@ -3,6 +3,9 @@ class ProfileController < ApplicationController
 
   def show
     @current_profile_user = current_user
+    @tweet_presenters = @current_profile_user.tweets.map do |tweet|
+      TweetPresenter.new(tweet: tweet, current_user: @current_profile_user)
+    end
     render "users/show"
   end
 
