@@ -1,0 +1,44 @@
+active storage
+
+  source: https://guides.rubyonrails.org/active_storage_overview.html
+
+  to set profile pictures (or avatars)
+
+  normally this is not used but it's needed for this mvp
+
+  how to set it up:
+
+    bundle exec rails active_storage:install
+
+      this creates a migration that will create the necessary tables to support files/images/etc
+
+    then in config/environments/development.rb
+
+      make sure this line is set to local if you are not using another service like aws to store the files/images/etc
+
+        config.active_storage.service = :local
+
+    then if you want to for example make your user have an avatar you will need to add this to its model
+
+      has_one_attached :avatar
+
+
+  about the tables created:
+
+    active_storage_blobs
+      stores metadata about the file/blob that is saved
+          like the filename, content type (e.g., image/png), byte size, etc.
+
+    active_storage_attachments
+      it's basically a join table that connects a model (like User) with a blob that is saved in active_storage_blobs
+        so it determines which blob is related with which record
+
+
+  other considerations:
+
+    normally you would need to resize the images
+      or you could add probably validations to make sure files are not more than a certain size
+
+      if you want to resize you might need to install some dependencies like imagemagick
+
+  

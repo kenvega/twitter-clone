@@ -1,4 +1,4 @@
-if you have something like this
+if your code ends up doing queries to the database like this
 
   SELECT categories.* FROM categories
 
@@ -10,14 +10,14 @@ if you have something like this
 
   you have an N+1 query problem
 
-the queries should be done like this instead
+your queries in that case can be reduced to just 2 making the application feel faster
 
   SELECT categories.* FROM categories
 
   SELECT products.* FROM products WHERE products.category_id IN (1,2,3,4,5)
 
 
-to detect this issues automatically you can use the gem bullet
+to detect these issues automatically you can use the gem bullet
 
   setup of the bullet gem
 
