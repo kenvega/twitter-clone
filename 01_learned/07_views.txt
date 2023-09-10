@@ -39,6 +39,12 @@ you can create partials where you see that code is reusable or to make the view 
 
         * notice how the '_' character is not needed when using the partial
 
+  to say what partial to render you can give a regular name or a path name
+
+    for regular names like render 'sidebar' it will look for a partial called '_sidebar' in the same directory your controller is related to
+
+    for paths names like render 'users/sidebar' it will look for the file '_sidebar' inside the 'users' folder from views
+
 to render a partial with extra parameters
 
   you can use this short form

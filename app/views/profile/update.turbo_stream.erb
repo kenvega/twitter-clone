@@ -1,3 +1,7 @@
 <%= turbo_stream.replace "profile-section" do %>
   <%= render partial: "users/profile_section", locals: { user: current_user } %>
 <% end %>
+
+<%= turbo_stream.replace "tweets-collection" do %>
+  <%= render partial: "users/tweets_collection", locals: { tweet_presenter: @tweet_presenters } %>
+<% end %>
