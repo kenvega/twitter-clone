@@ -1,0 +1,7 @@
+the main file is app/helpers/application_helper.rb
+
+you can set methods here that can be used in all views
+
+in the helper file you have access to the methods you regularly have access in the views
+  for example 'controller_name'
+
