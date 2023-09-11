@@ -1,5 +1,8 @@
 https://github.com/thoughtbot/shoulda-matchers
 
+  just look for any method you might in that url
+    then you can click any of those and you will get more info in comments in the code
+
 you have to add this
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|

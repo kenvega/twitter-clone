@@ -16,5 +16,7 @@ class Tweet < ApplicationRecord
   belongs_to :parent_tweet, foreign_key: :parent_tweet_id, class_name: "Tweet", inverse_of: :reply_tweets, optional: true, counter_cache: :reply_tweets_count
   has_many :reply_tweets, foreign_key: :parent_tweet_id, class_name: "Tweet", inverse_of: :parent_tweet
 
+  has_and_belongs_to_many :hashtags
+
   validates :body, presence: true, length: { maximum: 280 }
 end

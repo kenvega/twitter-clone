@@ -74,3 +74,7 @@ list of migrations/commands done in this project
   bundle exec rails g migration add_url_to_users url:string
 
   bundle exec rails g model Follow follower:references followed:references
+
+  bundle exec rails g model hashtag tag:string
+
+  bundle exec rails g migration create_hashtags_tweets_table
