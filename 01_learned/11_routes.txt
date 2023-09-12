@@ -50,6 +50,13 @@ you can set only methods to create a few routes
     PUT /usernames/:id --- usernames#update
 
 
+you can let the urls in the browser have a different name for what they really are
+
+  for example if the url path for the browser should be /explore but really all it does is to index all hashtags you can do this
+    in your routes.rb file
+
+      resources :hashtags, only: :index, path: "/explore"
+
 nested routes
 
   this single line

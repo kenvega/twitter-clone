@@ -1,0 +1,14 @@
+<div class="col-7">
+  <div class="mb-3">
+    <%= link_to "Explore", hashtags_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
+  </div>
+
+  <% @hashtags.each do |hashtag| %>
+    <div>
+      <%= hashtag.tag %>
+    </div>
+  <% end %>
+
+</div>
+
+<div class="col">Search Bar / Trending / Who to follow</div>

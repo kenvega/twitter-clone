@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
+  <%= link_to hashtags_path, class: "d-flex align-items-center fs-5 mb-3 #{nav_link_active?('hashtags')}" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px"><%= image_tag "hashtag.svg", width: "32" %></span> Explore
     </div>
