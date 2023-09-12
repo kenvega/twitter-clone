@@ -22,4 +22,35 @@ RSpec.describe Tweet, type: :model do
 
   it { should validate_presence_of(:body) }
   it { should validate_length_of(:body).is_at_most(280) }
+
+  describe "saving hashtags" do
+    let(:user) { create(:user) }
+
+    context "when there are no hashtags in the body" do
+      it "does not create hashtags" do
+        expect do
+          Tweet.create(user: user, body: "a simple tweet")
+        end.not_to change { Hashtag.count }
+      end
+    end
+
+    context "when there are hashtags in the body" do
+      it "creates hashtags" do
+        expect do
+          Tweet.create(user: user, body: "a #simple #tweet")
+        end.to change { Hashtag.count }.by(2)
+      end
+    end
+
+    context "when there are duplicate hashtags in the body" do
+      it "does not create extra hashtags" do
+        Hashtag.create(tag: "little")
+
+        expect do
+          Tweet.create(user: user, body: "a #little #simple #tweet")
+        end.to change { Hashtag.count }.by(2)
+      end
+    end
+
+  end
 end

@@ -1,0 +1,16 @@
+rubular.com
+
+  a site where you can test regular expressions
+
+how can you test regular expressions
+
+  open a rails console and test with .match for the first match or .scan for all the matches
+    e.g.
+
+      words = "ruby #rails is ok"
+
+      words.match(/#.+/)  # this would return MatchData "#rails is ok"
+
+      words.match(#\w+) # returns -> MatchData "#rails"
+
+    
