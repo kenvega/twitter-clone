@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     this.element.addEventListener('click', (_) => {
-      Turbo.visit(this.element.dataset.urls)
+      Turbo.visit(this.element.dataset.url)
     })
   }
 }
