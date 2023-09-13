@@ -30,5 +30,5 @@ Rails.application.routes.draw do
   post '/users/:follower_id/follows/:followed_id', to: "follows#create", as: :create_follow
   delete '/follows/:id', to: "follows#destroy", as: :delete_follow
 
-  resources :hashtags, only: :index, path: "/explore"
+  resources :hashtags, only: [:index, :show], path: "/explore"
 end

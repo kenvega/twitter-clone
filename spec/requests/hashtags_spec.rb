@@ -11,4 +11,12 @@ RSpec.describe "Hashtags", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET show" do
+    it "succeeds" do
+      hashtag = create(:hashtag)
+      get hashtag_path(hashtag)
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

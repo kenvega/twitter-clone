@@ -4,4 +4,7 @@ class HashtagsController < ApplicationController
   def index
     @hashtags = Hashtag.all
   end
+
+  def show
+  end
 end
