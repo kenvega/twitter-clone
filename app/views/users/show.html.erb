@@ -6,7 +6,9 @@
   </div>
 </div>
 
-<div class="col">Search Bar / Trending / Who to follow</div>
+<div class="col">
+  <%= render "shared/hashtags_sidebar" %>
+</div>
 
 <% if controller_name == "profile" %>
   <!-- Tweet Form Modal in sidebar -->

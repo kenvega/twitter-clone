@@ -3,3 +3,12 @@
     background-color: $gray-200;
   }
 }
+
+.hashtag-sidebar {
+  background-color: $gray-100;
+
+  .item:hover {
+    background-color: $gray-300;
+    cursor: pointer;
+  }
+}
