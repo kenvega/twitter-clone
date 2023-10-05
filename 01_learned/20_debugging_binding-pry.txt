@@ -36,3 +36,9 @@ if you want to debug values in a view you can do this
   put a <% raise %> in the view
 
     this will generate an error in the view and you will get a console in the webpage below where you can test your values
+
+if you created a new model and were testing stuff that you want now to be deleted
+
+  User.destroy_all
+
+    something like this in a rails console where User can be replaced for the model you were creating records for can help
