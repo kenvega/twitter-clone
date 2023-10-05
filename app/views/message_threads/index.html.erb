@@ -1,0 +1,48 @@
+<div class="col" data-controller="messages">
+  <div class="mb-5">
+    <%= link_to :back, class: "fs-4 text-decoration-none text-black fw-semibold" do %>
+      <%= image_tag "back.svg", size: "28x28", class: "me-4" %>
+      <span style="position: relative; top: 2px;">Messages</span>
+    <% end %>
+  </div>
+
+  <% @message_threads.each do |message_thread| %>
+    <% if message_thread.new_record? %>
+      <% other_user = @user %>
+    <% else %>
+      <% other_user = message_thread.users.where.not(id: current_user.id).first %>
+    <% end %>
+    <div
+      data-messages-target="messageThread"
+      data-message-thread-id="<%= message_thread.id %>"
+      data-messages-target-user-id="<%= other_user.id %>"
+      class="message-thread <% 'active' if message_thread.new_record? %> d-flex py-3 px-3"
+    >
+      <div class="flex-shrink-0">
+        <% if other_user.avatar.present? %>
+          <%= image_tag other_user.avatar, size: "48x48", class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+        <% end %>
+      </div>
+
+      <div class="flex-grow-1 ms-3">
+        <div>
+          <span class="fw-bold mr-3"><%= other_user.display_name %></span>
+          <span class="text-muted">@<%= other_user.username %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<div class="col-6">
+  <div class="vh-100 position-relative">
+    <%= render "messages", messages: @messages %>
+
+    <div class="position-absolute w-100 bottom-0">
+      <%= render "messages/form", user: @user %>
+    </div>
+  </div>
+</div>

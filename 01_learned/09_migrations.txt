@@ -81,3 +81,10 @@ list of migrations/commands done in this project
 
   bundle exec rails g migration add_index_to_tag_column_on_hashtags
 
+  bundle exec rails g model message user:references body:text
+
+  bundle exec rails g model message_thread
+
+  bundle exec rails g migration create_message_threads_users_join_table
+
+  bundle exec rails g migration add_message_threads_reference_to_messages message_thread:references

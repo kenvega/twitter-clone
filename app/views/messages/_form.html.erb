@@ -1,0 +1,13 @@
+<div id="message-form">
+  <%= form_with model: Message.new, url: messages_path do |f| %>
+    <div class="input-group mb-3">
+
+      <%= hidden_field_tag :user_id, user&.id %>
+
+      <%= f.text_field :body, class: "form-control", placeholder: "Type your message" %>
+      <%= button_tag class: "btn btn-outline-secondary" do %>
+        <%= image_tag "message.svg", size: "18x18" %>
+      <% end  %>
+    </div>
+  <% end %>
+</div>

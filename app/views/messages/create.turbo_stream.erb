@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "message-form" do %>
+  <%= render partial: "messages/form", locals: { user: @user } %>
+<% end %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render partial: "messages/message", locals: { message: @message } %>
+<% end %>

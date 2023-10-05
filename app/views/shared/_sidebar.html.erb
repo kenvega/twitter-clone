@@ -23,7 +23,7 @@
     </div>
   <% end %>
 
-  <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
+  <%= link_to message_threads_path, class: "d-flex align-items-center fs-5 mb-3 #{nav_link_active?('messages')}" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px"><%= image_tag "email.svg", width: "32" %></span> Messages
     </div>

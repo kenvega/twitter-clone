@@ -31,4 +31,10 @@ Rails.application.routes.draw do
   delete '/follows/:id', to: "follows#destroy", as: :delete_follow
 
   resources :hashtags, only: [:index, :show], path: "/explore"
+
+  resources :message_threads, only: :index, path: "/messages" do
+    resources :messages, only: :index
+  end
+
+  resources :messages, only: :create
 end

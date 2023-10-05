@@ -18,7 +18,14 @@
     <% if controller_name == "profile" %>
       <div><%= button_tag "Edit Profile", data: { "bs-toggle": "modal", "bs-target": "#profile-edit-modal" }, class: "btn btn-twitter-outline rounded-pill" %></div>
     <% else %>
-      <%= render "users/follow_button", follower: current_user, followed: user %>
+      <div>
+        <%= link_to message_threads_path(user_id: user.id), class: "btn btn-twitter-outline rounded-pill" do %>
+          <%= image_tag "message.svg", size: "18x18" %>
+          Message
+        <% end %>
+
+        <%= render "users/follow_button", follower: current_user, followed: user %>
+      </div>
     <% end %>
   </div>
 
