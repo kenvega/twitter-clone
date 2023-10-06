@@ -2,6 +2,10 @@ to run your created migrations (for db and test db)
 
   bundle exec rails db:migrate db:test:prepare
 
+if you are in development and want to have your tables empty
+
+  bundle exec rails db:drop db:create db:migrate # CAREFUL!!! will destroy all records of data in all tables
+
 first migration to change a table was to add a username field to the users table
 
   you can use camel case or snake case in the migration name. both will work the same
@@ -81,3 +85,17 @@ list of migrations/commands done in this project
 
   bundle exec rails g migration add_index_to_tag_column_on_hashtags
 
+  bundle exec rails g model message body:text
+    the sender is added later in the migration
+
+    body is null false -- no empty body messages allowed
+
+  bundle exec rails g model conversation
+
+  bundle exec rails g migration create_conversations_users
+
+    a join table to list all the conversations from a user
+
+  bundle exec rails g migration add_conversations_reference_to_messages conversation:references
+
+    a message pertains to a conversation

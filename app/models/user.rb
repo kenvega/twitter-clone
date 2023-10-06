@@ -47,6 +47,10 @@ class User < ApplicationRecord
   #   example there is no line -> has_many :follows
   #     because we wouldn't know if we refer as instances where user is the follower or the followed
 
+  has_many :messages, foreign_key: :sender_id
+
+  has_and_belongs_to_many :conversations
+
   has_one_attached :avatar
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
