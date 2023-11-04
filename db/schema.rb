@@ -128,13 +128,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_040740) do
     t.index ["user_id"], name: "index_retweets_on_user_id"
   end
 
-  create_table "subscribers", force: :cascade do |t|
+  create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "channel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_subscribers_on_channel_id"
-    t.index ["user_id"], name: "index_subscribers_on_user_id"
+    t.index ["channel_id"], name: "index_subscriptions_on_channel_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -191,8 +191,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_040740) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
-  add_foreign_key "subscribers", "channels"
-  add_foreign_key "subscribers", "users"
+  add_foreign_key "subscriptions", "channels"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "tweets", "tweets", column: "parent_tweet_id"
   add_foreign_key "tweets", "users"
   add_foreign_key "views", "tweets"

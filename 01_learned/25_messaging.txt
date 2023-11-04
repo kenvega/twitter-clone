@@ -34,10 +34,10 @@ polling solution
           because of the join table chatmember
 
 
-    Subscriber / ChannelUser / ConversationUser / ChatMember / MessageThreadUser
+    Subscription / Subscriber / ChannelUser / ConversationUser / ChatMember / MessageThreadUser
       why
-        a join table between the User and the Conversations tables is needed
-          this way we can list all the Conversations a user pertains to
+        a join table between the User and the Channel tables is needed
+          this way we can list all the Channels a user pertains to
         this will be also a model because we will handle some logic with it
           so we won't do a has_and_belongs_to_many association instead we will do a has_many through association in the join model
             the tests should be updated based on that
@@ -53,7 +53,12 @@ polling solution
         belongs to a Channel
 
 
+for the 'building' of new messages when clicking a message to a new user
+
+  for now it's just using the profile user to simulate the channel
 
 
+instead of using the Subscription join model we could just do some postgresql queries
 
+  but we will leave a model so it's easier for people who don't know about postgresql queries
 

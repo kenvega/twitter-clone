@@ -92,7 +92,7 @@ list of migrations/commands done in this project
 
   bundle exec rails g model channel
 
-  bundle exec rails g model Subscriber user:references channel:references
+  bundle exec rails g model Subscription user:references channel:references
 
     a join table to list all the channels a user pertains to
 

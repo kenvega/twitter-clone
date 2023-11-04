@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :subscriber do
+  factory :subscription do
     user { nil }
     channel { nil }
   end

@@ -49,8 +49,8 @@ class User < ApplicationRecord
 
   has_many :messages, foreign_key: :sender_id
 
-  has_many :subscribers
-  has_many :channels, through: :subscribers
+  has_many :subscriptions
+  has_many :channels, through: :subscriptions
 
   has_one_attached :avatar
 

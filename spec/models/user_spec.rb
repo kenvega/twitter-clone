@@ -21,8 +21,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:followers).through(:received_follows).source(:follower) }
 
   it { should have_many(:messages) }
-  it { should have_many(:subscribers) }
-  it { should have_many(:channels).through(:subscribers) }
+  it { should have_many(:subscriptions) }
+  it { should have_many(:channels).through(:subscriptions) }
 
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 

@@ -1,6 +1,6 @@
 class Channel < ApplicationRecord
-  has_many :subscribers
-  has_many :users, through: :subscribers
+  has_many :subscriptions
+  has_many :users, through: :subscriptions
 
   has_many :messages
 end
