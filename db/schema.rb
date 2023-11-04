@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_151351) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_040740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,18 +52,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_151351) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "conversations", force: :cascade do |t|
+  create_table "channels", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "conversations_users", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "conversation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["conversation_id"], name: "index_conversations_users_on_conversation_id"
-    t.index ["user_id"], name: "index_conversations_users_on_user_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -122,8 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_151351) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "conversation_id", null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.bigint "channel_id", null: false
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
@@ -135,6 +126,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_151351) do
     t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
     t.index ["user_id", "tweet_id"], name: "index_retweets_on_user_id_and_tweet_id", unique: true
     t.index ["user_id"], name: "index_retweets_on_user_id"
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_subscribers_on_channel_id"
+    t.index ["user_id"], name: "index_subscribers_on_user_id"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -187,10 +187,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_151351) do
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
-  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "channels"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
+  add_foreign_key "subscribers", "channels"
+  add_foreign_key "subscribers", "users"
   add_foreign_key "tweets", "tweets", column: "parent_tweet_id"
   add_foreign_key "tweets", "users"
   add_foreign_key "views", "tweets"

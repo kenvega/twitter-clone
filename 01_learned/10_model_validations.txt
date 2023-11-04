@@ -25,3 +25,5 @@ if you want to check that a non-saved record is valid with the model validations
   user.valid? # this will tell if the record is valid
   user.errors # this will tell which validations are incorrect
 
+it's always better to have the validation on the model and the database
+  so when creating tables/models put validations on both sides

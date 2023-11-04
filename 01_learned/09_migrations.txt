@@ -90,12 +90,13 @@ list of migrations/commands done in this project
 
     body is null false -- no empty body messages allowed
 
-  bundle exec rails g model conversation
+  bundle exec rails g model channel
 
-  bundle exec rails g migration create_conversations_users
+  bundle exec rails g model Subscriber user:references channel:references
 
-    a join table to list all the conversations from a user
+    a join table to list all the channels a user pertains to
 
-  bundle exec rails g migration add_conversations_reference_to_messages conversation:references
+  bundle exec rails g migration add_channels_reference_to_messages channel:references
 
-    a message pertains to a conversation
+    a message pertains to a channel
+

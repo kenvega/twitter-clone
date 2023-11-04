@@ -1,0 +1,9 @@
+has_and_belongs_to_many vs has_many and has_many / through
+
+if the join table does not have a model
+  your associated models unified by the join table will have to have a have_and_belong_to_many association
+  also in this case the name of the join table has to follow the pluralized table names and in it has to be in alphabetical order
+
+but if the join table does have a model
+  your associated models unified by the join table will have to use the have_many and have_many through associations
+  also in this case the name of the table basically does not have to follow pluralized table names nor alphabetical order
