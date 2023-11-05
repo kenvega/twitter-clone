@@ -8,7 +8,7 @@ class ChannelsController < ApplicationController
 
     # for the new conversation the user is about to begin
     if params[:user_id].present?
-      @new_subscription = User.find(params[:user_id])
+      @receiver_message_user = User.find(params[:user_id])
     end
   end
 end

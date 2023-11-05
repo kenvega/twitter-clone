@@ -6,27 +6,28 @@
     <% end %>
   </div>
 
-  <%# The temporal new 'subscription' (it's just a User instance in reality) for the selected user we tried to message %>
-  <% if @new_subscription.present? %>
+  <%# The receiver_message_user (it's just a User instance in reality) for the selected user we tried to message %>
+  <% if @receiver_message_user.present? %>
     <div>
       <div class="d-flex py-3 px-3">
         <div class="flex-shrink-0">
-          <% if @new_subscription.avatar.present? %>
-            <%= image_tag @new_subscription.avatar, size: "48x48", class: "rounded-circle" %>
+          <% if @receiver_message_user.avatar.present? %>
+            <%= image_tag @receiver_message_user.avatar, size: "48x48", class: "rounded-circle" %>
           <% else %>
             <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
           <% end %>
         </div>
         <div class="flex-grow-1 ms-3">
           <div>
-            <span class="fw-bold mr-3"><%= @new_subscription.display_name %></span>
-            <span class="text-muted">@<%= @new_subscription.username %></span>
+            <span class="fw-bold mr-3"><%= @receiver_message_user.display_name %></span>
+            <span class="text-muted">@<%= @receiver_message_user.username %></span>
           </div>
         </div>
       </div>
     </div>
   <% end %>
 
+  <%# TODO: could @receiver_message_user be actually called @receiver and replace this view variable receiver bellow? %>
   <%# The channels where the current user already have with another users. Reciever is also a User instance  %>
   <% @current_user_subscribed_channels.each do |subscribed_channel| %>
     <% receiver = subscribed_channel.users.where.not(id: current_user.id).first %>
@@ -58,17 +59,7 @@
 
     <%# the input for a new message %>
     <div class="position-absolute w-100 bottom-0">
-      <%= form_with model: Message.new, url: messages_path do |f| %>
-        <div class="input-group mb-3">
-          <% if @new_subscription.present? %>
-            <%= hidden_field_tag :user_id, @new_subscription.id %>
-          <% end %>
-          <%= f.text_field :body, placeholder: "Type your message", class: "form-control" %>
-          <%= button_tag class: "btn btn-outline-secondary" do %>
-            <%= image_tag "message.svg", size: "17x17" %>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render "messages/new_message_form", receiver_message_user: @receiver_message_user %>
     </div>
   </div>
 </div>

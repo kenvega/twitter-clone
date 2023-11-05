@@ -6,6 +6,8 @@ class MessagesController < ApplicationController
     @channel = Channel.find(params[:channel_id])
     @messages_from_channel = @channel.messages
 
+    @receiver_message_user = @messages_from_channel.where.not(sender: current_user).first.sender
+
     respond_to do |format|
       format.turbo_stream
     end
@@ -33,16 +35,17 @@ class MessagesController < ApplicationController
         channel = Channel.create
         user_to_send_message.channels << channel
         current_user.channels << channel
-
-        # create the message
-        Message.create(message_params.merge(sender: current_user, channel: channel))
       end
     else
       # find the common channel
       channel = Channel.find(common_channels_ids.first)
+    end
 
-      # create a new message with that channel
-      Message.create(message_params.merge(sender: current_user, channel: channel))
+    # create a new message with that channel
+    @message = Message.create(message_params.merge(sender: current_user, channel: channel))
+
+    respond_to do |format|
+      format.turbo_stream
     end
 
   end

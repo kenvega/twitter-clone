@@ -1,3 +1,7 @@
 <%= turbo_stream.replace "messages" do %>
   <%= render partial: "channels/messages", locals: { messages: @messages_from_channel } %>
 <% end %>
+
+<%= turbo_stream.replace "message-form" do %>
+  <%= render partial: "messages/new_message_form", locals: { receiver_message_user: @receiver_message_user } %>
+<% end %>
