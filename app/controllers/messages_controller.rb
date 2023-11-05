@@ -1,6 +1,16 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
 
+  # TODO: this action should probably be in another controller (?)
+  def index
+    @channel = Channel.find(params[:channel_id])
+    @messages_from_channel = @channel.messages
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   def create
     # to create a message we will check on all subscriptions of the user we are sending a message to
     #  and all subscriptions we have and check if there is a match there to add new messages to that or

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "messages" do %>
+  <%= render partial: "channels/messages", locals: { messages: @messages_from_channel } %>
+<% end %>
