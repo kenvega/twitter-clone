@@ -12,10 +12,24 @@ export default class extends Controller {
       channel.addEventListener('click', (e) => {
         e.preventDefault();
 
+        this.channelTargets.forEach(channel => {
+          channel.classList.remove('active')
+        })
+
+        channel.classList.add('active')
+
         fetch(`messages/${channel.dataset.channelId}/messages`, { headers: this.headers })
           .then(response => response.text())
           .then(html => Turbo.renderStreamMessage(html))
       })
     })
+
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+
+    if (urlParams.get('user_id') !== null) {
+      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('user_id')}"]`).click()
+      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('user_id')}"]`).classList.add('active')
+    }
   }
 }

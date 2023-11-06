@@ -32,7 +32,7 @@
   <% @current_user_subscribed_channels.each do |subscribed_channel| %>
     <% receiver = subscribed_channel.users.where.not(id: current_user.id).first %>
 
-    <div data-messages-target="channel" data-channel-id="<%= subscribed_channel.id %>" class="channel d-flex py-3 px-3">
+    <div data-messages-target="channel" data-channel-id="<%= subscribed_channel.id %>" data-messages-target-user-id="<%= receiver.id %>" class="channel d-flex py-3 px-3">
       <div class="flex-shrink-0">
         <% if receiver.avatar.present? %>
           <%= image_tag receiver.avatar, size: "48x48", class: "rounded-circle" %>
