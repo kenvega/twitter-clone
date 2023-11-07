@@ -18,7 +18,9 @@ export default class extends Controller {
 
         channel.classList.add('active')
 
-        fetch(`messages/${channel.dataset.channelId}/messages`, { headers: this.headers })
+        if (!channel.dataset.channelId) return
+
+        fetch(`messages/${channel.dataset.channelId}/messages?receiever_user_id=${channel.dataset.messagesTargetUserId}`, { headers: this.headers })
           .then(response => response.text())
           .then(html => Turbo.renderStreamMessage(html))
       })
