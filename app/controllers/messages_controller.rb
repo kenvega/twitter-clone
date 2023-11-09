@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
     #  and all subscriptions we have and check if there is a match there to add new messages to that or
     #  to create a new one
 
-    user_to_send_message = User.find(params[:user_id])
+    user_to_send_message = User.find(params[:input_receiver_user_id])
 
     user_to_send_message_subscriptions = Subscription.where(user: user_to_send_message)
     my_subscriptions = Subscription.where(user: current_user)
@@ -36,21 +36,20 @@ class MessagesController < ApplicationController
         user_to_send_message.channels << channel
         current_user.channels << channel
 
-        # create a new message with that channel
+        # create a new message in that new channel
         @message = Message.create(message_params.merge(sender: current_user, channel: channel))
       end
     else
       # find the common channel
       channel = Channel.find(common_channels_ids.first)
 
-      # create a new message with that channel
+      # create a new message in that common channel
       @message = Message.create(message_params.merge(sender: current_user, channel: channel))
     end
 
     respond_to do |format|
       format.turbo_stream
     end
-
   end
 
   private

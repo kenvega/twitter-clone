@@ -29,9 +29,9 @@ export default class extends Controller {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
 
-    if (urlParams.get('user_id') !== null) {
-      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('user_id')}"]`).click()
-      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('user_id')}"]`).classList.add('active')
+    if (urlParams.get('receiver_id') !== null) {
+      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('receiver_id')}"]`).click()
+      this.element.querySelector(`[data-messages-target-user-id="${urlParams.get('receiver_id')}"]`).classList.add('active')
     }
   }
 }

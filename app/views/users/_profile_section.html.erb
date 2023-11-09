@@ -19,7 +19,7 @@
       <div><%= button_tag "Edit Profile", data: { "bs-toggle": "modal", "bs-target": "#profile-edit-modal" }, class: "btn btn-twitter-outline rounded-pill" %></div>
     <% else %>
       <div>
-        <%= link_to channels_path(user_id: user.id), class: "btn btn-twitter-outline rounded-pill" do %>
+        <%= link_to channels_path(receiver_id: user.id), class: "btn btn-twitter-outline rounded-pill" do %>
           <%= image_tag "message.svg", size: "25x25" %>
           Message
         <% end %>
