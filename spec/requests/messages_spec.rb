@@ -11,7 +11,7 @@ RSpec.describe "Messages", type: :request do
 
       expect do
         post messages_path, headers: { 'Accept': 'text/vnd.turbo-stream.html' }, params: {
-          user_id: user_2.id,
+          input_receiver_user_id: user_2.id,
           message: {
             body: "new message"
           }
@@ -24,7 +24,7 @@ RSpec.describe "Messages", type: :request do
 
       expect do
         post messages_path, headers: { 'Accept': 'text/vnd.turbo-stream.html' }, params: {
-          user_id: user_2.id,
+          input_receiver_user_id: user_2.id,
           message: {
             body: "new message"
           }
@@ -47,7 +47,7 @@ RSpec.describe "Messages", type: :request do
     it "only creates one message on top of existing message" do
       expect do
         post messages_path, headers: { 'Accept': 'text/vnd.turbo-stream.html' }, params: {
-          user_id: user_2.id,
+          input_receiver_user_id: user_2.id,
           message: {
             body: "new message"
           }
