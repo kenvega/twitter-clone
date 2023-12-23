@@ -4,10 +4,22 @@
   </div>
 
   <div id="tweets">
-    <p>hello from notifications page</p>
-
     <% @notifications.each do |notification| %>
-      <p><%= notification.id %></p>
+      <% if notification.followed_me? %>
+        <div>
+          <% if notification.notifier.avatar.present? %>
+            <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+          <% end %>
+          <p><span class="fw-bold"><%= notification.notifier.display_name %></span> followed you</p>
+        </div>
+      <% elsif notification.liked_tweet? %>
+
+      <% elsif notification.mentioned_me? %>
+
+      <% end %>
+
     <% end %>
   </div>
 </div>
