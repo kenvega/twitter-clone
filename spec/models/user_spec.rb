@@ -24,6 +24,9 @@ RSpec.describe User, type: :model do
   it { should have_many(:subscriptions) }
   it { should have_many(:channels).through(:subscriptions) }
 
+  it { should have_many(:sent_notifications).with_foreign_key(:notifier_id).class_name("Notification").dependent(:destroy) }
+  it { should have_many(:received_notifications).with_foreign_key(:notified_id).class_name("Notification").dependent(:destroy) }
+
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
   describe "#set_display_name" do
