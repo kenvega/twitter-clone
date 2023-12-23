@@ -7,7 +7,9 @@
 
     <div data-tweet-path="<%= tweet_path(@tweet_presenter.tweet) %>" class="tweet d-flex py-3 px-3">
       <div class="flex-shrink-0">
-        <%= image_tag @tweet_presenter.avatar, size: "48x48", class: "rounded-circle" %>
+        <%= link_to user_path(@tweet_presenter.user) do %>
+          <%= image_tag @tweet_presenter.avatar, size: "48x48", class: "rounded-circle" %>
+        <% end %>
       </div>
 
       <div class="flex-grow-1 ms-3">
