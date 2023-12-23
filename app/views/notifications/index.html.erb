@@ -5,6 +5,10 @@
 
   <div id="tweets">
     <p>hello from notifications page</p>
+
+    <% @notifications.each do |notification| %>
+      <p><%= notification.id %></p>
+    <% end %>
   </div>
 </div>
 

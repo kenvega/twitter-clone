@@ -5,6 +5,8 @@ class FollowsController < ApplicationController
   def create
     follow = @follower.given_follows.create(follow_params)
 
+    @followed.received_notifications.create(action: "followed-me", notifier: @follower)
+
     respond_to do |format|
       format.html do
         redirect_to user_path(follow.followed)
