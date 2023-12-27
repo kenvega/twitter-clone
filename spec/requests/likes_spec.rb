@@ -12,6 +12,12 @@ RSpec.describe "Likes", type: :request do
         post tweet_likes_path(tweet)
       end.to change { Like.count }.by(1)
     end
+
+    it "creates a new notification" do
+      expect do
+        post tweet_likes_path(tweet)
+      end.to change { Notification.count }.by(1)
+    end
   end
 
   describe "DELETE destroy" do

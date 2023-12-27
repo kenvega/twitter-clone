@@ -96,5 +96,20 @@ some examples of warnings (and solutions) coming from bullet (as alerts in the w
     solved with
       Tweet.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
 
+  example 4
+    @notifications = current_user.received_notifications.includes(:notifier, :tweet)
 
+    user: kenair
+    USE eager loading detected
+    User => [:avatar_attachment]
+    Add to your query: .includes([:avatar_attachment])
+    Call stack
+    /.../twitter-clone/app/views/notifications/index.html.erb:19:in `block in _app_views_notifications_index_html_erb__3037442438228216196_343540'
+    /.../twitter-clone/app/views/notifications/index.html.erb:7:in `_app_views_notifications_index_html_erb__3037442438228216196_343540
+
+    solved with
+
+      @notifications = current_user.received_notifications.includes({notifier: [:avatar_attachment]}, :tweet)
+
+      because I was iterating through notifications and then doing notification.notifier.avatar so i needed the avatar
 
