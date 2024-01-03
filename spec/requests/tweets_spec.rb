@@ -44,4 +44,25 @@ RSpec.describe "Tweets", type: :request do
       end
     end
   end
+
+  describe "saving mentions" do
+    let (:user) { create(:user) }
+
+    context "when there are no mentions in the body" do
+      it "does not create any new mentions" do
+        expect do
+          Tweet.create(user: user, body: 'mary had a little lamb')
+        end.not_to change { Mention.count }
+      end
+    end
+
+    context "when there are mentions in the body" do
+      it "creates new mentions" do
+        user = User.create(email: "foo@bar.com", username: "foobar", password: "password")
+        expect do
+          Tweet.create(user: user, body: "this is a test mention tweet for @foobar")
+        end.to change { Mention.count }.by(1)
+      end
+    end
+  end
 end
