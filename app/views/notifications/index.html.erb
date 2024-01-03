@@ -25,10 +25,18 @@
           <p class="text-muted mb-1"><%= notification.tweet.body %></p>
           <%= link_to "Show all", tweet_path(notification.tweet), class: "tweet-link mb-1" %>
         </div>
+      <%# TODO: here because the mentioned_me does not use a tweet it triggers bullet to avoid including the tweet. how to solve? %>
       <% elsif notification.mentioned_me? %>
-
+        <div>
+          <% if notification.notifier.avatar.present? %>
+            <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+          <% end %>
+        </div>
+        <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> mentioned you</p>
+        <%= link_to "Show @#{notification.notifier.username}", user_path(notification.notifier), class: "tweet-link mb-1" %>
       <% end %>
-
     <% end %>
   </div>
 </div>
