@@ -103,3 +103,6 @@ list of migrations/commands done in this project
   bundle exec rails g model notification notifier:references notified:references tweet:references action:string
 
   bundle exec rails g model mention tweet:references mentioned_user:references
+
+  bundle exec rails g model tweet_activity user:references tweet:references activity:string
+

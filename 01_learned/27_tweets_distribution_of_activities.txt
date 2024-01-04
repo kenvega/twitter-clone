@@ -1,0 +1,14 @@
+tweet distribution types
+
+twitter shows you activities in the homepage based on these and more conditions:
+
+- tweets from people I'm following
+- tweets that were liked by the people that I'm following
+- tweets that were replied to by the people that I'm following
+- tweets that were retweeted by the people that I'm following
+
+we can call these activities and save them in a table
+
+  so we will save information where relevant users to you do some activities
+  and then tie every activity to a specific tweet
+

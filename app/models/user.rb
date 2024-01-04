@@ -55,6 +55,8 @@ class User < ApplicationRecord
   has_many :sent_notifications, class_name: "Notification", foreign_key: :notifier_id, dependent: :destroy
   has_many :received_notifications, class_name: "Notification", foreign_key: :notified_id, dependent: :destroy
 
+  has_many :tweet_activities, dependent: :destroy
+
   has_one_attached :avatar
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
