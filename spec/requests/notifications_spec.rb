@@ -11,4 +11,13 @@ RSpec.describe "Notifications", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "DELETE destroy" do
+    it "deletes a record" do
+      notification = create(:notification)
+      expect do
+        delete notification_path(notification), headers: { 'Accept': 'text/vnd.turbo-stream.html' }
+      end.to change { Notification.count }.by(-1)
+    end
+  end
 end

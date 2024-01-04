@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :notification do
-    notifier { nil }
-    notified { nil }
-    tweet { nil }
-    action { "MyString" }
+    notifier { create(:user) }
+    notified { create(:user) }
+    tweet
+    action { Notification::ACTIONS.sample }
   end
 end

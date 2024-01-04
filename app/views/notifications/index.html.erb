@@ -6,36 +6,57 @@
   <div id="tweets">
     <% @notifications.each do |notification| %>
       <% if notification.followed_me? %>
-        <div>
-          <% if notification.notifier.avatar.present? %>
-            <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-          <p><span class="fw-bold"><%= notification.notifier.display_name %></span> followed you</p>
-        </div>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.notifier.avatar.present? %>
+                <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> followed you</p>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete } , class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <% elsif notification.liked_tweet? %>
-        <div>
-          <% if notification.notifier.avatar.present? %>
-            <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-          <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> liked your tweet</p>
-          <p class="text-muted mb-1"><%= notification.tweet.body %></p>
-          <%= link_to "Show all", tweet_path(notification.tweet), class: "tweet-link mb-1" %>
-        </div>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.notifier.avatar.present? %>
+                <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> liked your tweet</p>
+              <p class="text-muted mb-1"><%= notification.tweet.body %></p>
+              <%= link_to "Show all", tweet_path(notification.tweet), class: "tweet-link mb-1" %>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete } , class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <%# TODO: here because the mentioned_me does not use a tweet it triggers bullet to avoid including the tweet. how to solve? %>
       <% elsif notification.mentioned_me? %>
-        <div>
-          <% if notification.notifier.avatar.present? %>
-            <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-        </div>
-        <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> mentioned you</p>
-        <%= link_to "Show @#{notification.notifier.username}", user_path(notification.notifier), class: "tweet-link mb-1" %>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.notifier.avatar.present? %>
+                <%= image_tag notification.notifier.avatar, size: '48x48', class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.notifier.display_name %></span> mentioned you</p>
+              <%= link_to "Show @#{notification.notifier.username}", user_path(notification.notifier), class: "tweet-link mb-1" %>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete } , class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>
