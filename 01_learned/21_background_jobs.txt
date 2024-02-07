@@ -52,11 +52,11 @@ setup delayed_jobs
         end
       end
 
-  then to run the background jobs you need to open a new terminal and run this command  
+how to run the background jobs you need to open a new terminal and run this command
 
-    bundle exec rails jobs:work
+  bundle exec rails jobs:work
 
-      this will run the workers that pick the queued jobs in the delayed_jobs table and then run those jobs in the background
+    this will run the workers that pick the queued jobs in the delayed_jobs table and then run those jobs in the background
 
   with that you can have the setup complete and can create jobs to be run in background
 
@@ -79,3 +79,6 @@ creating jobs with delayed_jobs
     ViewTweetJob.perform_later(tweet: tweet, user: current_user)
 
 
+  to create a namespace for the background jobs with delayed_jobs
+
+    bundle exec rails g job tweet_activity/tweeted

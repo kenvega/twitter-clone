@@ -1,0 +1,5 @@
+activerecord-import gem
+
+  a gem that allows you to make bulk inserts
+
+  i saw that on rails v6+ you can use insert_all but i followed the tutorial for now that uses the gem

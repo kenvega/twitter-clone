@@ -10,9 +10,20 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @tweet = Tweet.new(tweet_params.merge(user: current_user))
+    @tweet = Tweet.create(tweet_params.merge(user: current_user))
 
-    if @tweet.save
+    # create the activity for the followers of the user that the current user created a tweet
+
+    #   below solution is not efficient because a user might have 1 000 000 followers and then this would generate many insert queries. best is first to make it a background job
+    #     current_user.followers.each do |follower|
+    #       TweetActivity.create(activity_viewer: follower, activity_creator: current_user, tweet: @tweet, activity: 'tweeted')
+    #     end
+
+    #   doing a background job will make the endpoint to create tweets faster. creating the activities for the followers later
+    TweetActivity::TweetedJob.perform_later(activity_creator: current_user, tweet: @tweet)
+
+    #   before we were checking with @tweet.save? but now we can also check with @tweet.persisted?
+    if @tweet.persisted?
       respond_to do |format|
         format.html { redirect_to dashboard_path }
 
