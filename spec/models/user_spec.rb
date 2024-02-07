@@ -27,7 +27,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:sent_notifications).with_foreign_key(:notifier_id).class_name("Notification").dependent(:destroy) }
   it { should have_many(:received_notifications).with_foreign_key(:notified_id).class_name("Notification").dependent(:destroy) }
 
-  it { should have_many(:tweet_activities).dependent(:destroy) }
+  it { should have_many(:viewable_activities).with_foreign_key(:activity_viewer_id).class_name("TweetActivity").dependent(:destroy) }
+  it { should have_many(:created_activities).with_foreign_key(:activity_creator_id).class_name("TweetActivity").dependent(:destroy) }
 
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 

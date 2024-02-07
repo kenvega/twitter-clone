@@ -1,0 +1,16 @@
+notifications on
+
+  someone follows user
+  someone likes user tweet
+  someone mentions user in a tweet
+
+
+we need a notifications table
+  id
+  timestamps
+  ...
+
+do not put 'type' as the name of a column unless you want rails to treat it like an STI table
+
+
+

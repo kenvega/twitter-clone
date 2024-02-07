@@ -57,6 +57,9 @@ class User < ApplicationRecord
 
   has_many :tweet_activities, dependent: :destroy
 
+  has_many :viewable_activities, class_name: "TweetActivity", foreign_key: :activity_viewer_id, dependent: :destroy
+  has_many :created_activities, class_name: "TweetActivity", foreign_key: :activity_creator_id, dependent: :destroy
+
   has_one_attached :avatar
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true

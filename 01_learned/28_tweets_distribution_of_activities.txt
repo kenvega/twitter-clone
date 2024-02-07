@@ -12,3 +12,9 @@ we can call these activities and save them in a table
   so we will save information where relevant users to you do some activities
   and then tie every activity to a specific tweet
 
+
+this is a table that
+  gets populated as the relevant users to me
+    start doing these things:
+  these activities are tied to a tweet
+
