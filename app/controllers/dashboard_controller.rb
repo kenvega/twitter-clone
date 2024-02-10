@@ -2,15 +2,20 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # before we loaded all tweets
+    # initially we loaded all tweets
     # @tweets = Tweet.includes(user: {avatar_attachment: :blob}).order(created_at: :desc).map do |tweet|
     #   TweetPresenter.new(tweet: tweet, current_user: current_user)
     # end
 
-    # for now we will load just tweets from people we follow but these will be soon based on activities
-    followed_users = current_user.followed_users
-    @tweets = Tweet.includes(user: {avatar_attachment: :blob}).where(user: followed_users).order(created_at: :desc).map do |tweet|
-      TweetPresenter.new(tweet: tweet, current_user: current_user)
+    # then, we loaded just tweets from people we follow
+    # followed_users = current_user.followed_users
+    # @tweets = Tweet.includes(user: {avatar_attachment: :blob}).where(user: followed_users).order(created_at: :desc).map do |tweet|
+    #   TweetPresenter.new(tweet: tweet, current_user: current_user)
+    # end
+
+    # and after that we needed to load the general activities instead of just the tweets
+    @tweet_activities = current_user.viewable_activities.includes(tweet: [:user]).order(created_at: :desc).map do |tweet_activity|
+      TweetPresenter.new(tweet: tweet_activity.tweet, current_user: current_user)
     end
   end
 end
