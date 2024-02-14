@@ -1,3 +1,6 @@
+<% if tweet_presenter.render_tweet_activity? %>
+  <%= tweet_presenter.tweet_activity_html.html_safe %>
+<% end %>
 <%= turbo_frame_tag dom_id(tweet_presenter.tweet) do %>
   <div data-controller="tweet-card" data-tweet-path="<%= tweet_path(tweet_presenter.tweet) %>" class="tweet hover d-flex py-3 px-3">
     <div class="flex-shrink-0">

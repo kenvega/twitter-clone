@@ -27,5 +27,14 @@ RSpec.describe "Likes", type: :request do
         delete tweet_like_path(tweet, like)
       end.to change { Like.count }.by(-1)
     end
+
+    it "deletes a tweet activity" do
+      like = create(:like, user: user, tweet: tweet)
+      # this activity assumes that 'tweet.user' is following 'user'. TODO: this test needs improvement
+      tweet_activity = create(:tweet_activity, activity_viewer: tweet.user, activity_creator: user, tweet: tweet, activity: 'liked')
+      expect do
+        delete tweet_like_path(tweet, like)
+      end.to change { TweetActivity.count }.by(-1)
+    end
   end
 end
