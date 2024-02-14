@@ -82,3 +82,13 @@ creating jobs with delayed_jobs
   to create a namespace for the background jobs with delayed_jobs
 
     bundle exec rails g job tweet_activity/tweeted
+
+deleting scheduled / enqueued jobs with delayed_jobs
+
+  if for some reason you need to remove jobs before they were processed and you are using the gem delayed_job_active_record
+
+    you can do this in the rails console
+
+      Delayed::Job.delete_all
+
+    or you can check the table delayed_jobs where there is a record for every job

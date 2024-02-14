@@ -6,6 +6,8 @@ class LikesController < ApplicationController
 
     Notification.create(notified: tweet.user, notifier: current_user, action: "liked-tweet", tweet: tweet)
 
+    CreateTweetActivityJob.perform_later(activity_creator: current_user, tweet: tweet, activity: 'liked')
+
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.turbo_stream
