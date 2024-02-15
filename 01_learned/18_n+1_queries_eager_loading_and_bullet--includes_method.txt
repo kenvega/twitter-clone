@@ -16,10 +16,71 @@ your queries in that case can be reduced to just 2 making the application feel f
 
   SELECT products.* FROM products WHERE products.category_id IN (1,2,3,4,5)
 
+in general to get the root of the issue in N+1 queries
+  you have to check where you are loading a collection of objects that later need related data for each one of those objects
+    usually (not always) this happen when those initial objects are inside a loop then accesing other related objects without preloading those related objects
 
-to detect these issues automatically you can use the gem bullet
+  example
+    at some point you load tweets
+    and then you need to access the avatar of every user of that tweet
+    so you do something like tweet.user.avatar inside a loop
 
-  setup of the bullet gem
+      this should create an N+1 problem because for every tweet you will need to look for a user in different database queries
+        and even after that you will have to query also for every avatar_attachment of every user
+
+          to solve these kind of issues you use .includes in the moment you load the original collection of objects that later load the related ones
+
+            so following the example where you load the tweets you would do something like:
+              Tweet.includes(user: :avatar_attachment)
+
+                this will preload in the same query the users related to those tweets and also the avatars related to those users
+                  this way the number of queries will be reduced and the N+1 query issue will be gone
+
+the .includes methods is very flexible so many syntax cases work on it
+
+  this is because the includes method can include nested relationships so it can become a little confusing to read at first
+
+  here are some examples of syntaxes that work with includes
+
+    1. Single Association
+      Syntax: .includes(:user)
+      Use: Preloads the user association.
+
+    2. Multiple Associations at the Same Level
+      Syntax: .includes(:user, :activity_creator)
+      Use: Preloads both the user and activity_creator associations.
+
+    3. Nested Associations
+      Syntax: .includes(user: [:profile])
+      Use: Preloads the user association and, for each user, their profile association.
+
+    4. Nested Associations with Multiple Nested Levels
+      Syntax: .includes(user: { profile: :avatar_attachment })
+      Use: Preloads the user association, for each user their profile association, and for each profile, the avatar_attachment.
+
+    5. Mixed Single and Nested Associations
+      Syntax: .includes(:activity_creator, user: [:profile])
+      Use: Preloads the activity_creator association at the top level, and the user association along with its nested profile association.
+
+    6. Multiple Nested Associations for the Same Parent
+      Syntax: .includes(user: [:profile, :avatar_attachment])
+      Use: Preloads the user association, and for each user, their profile and avatar_attachment associations.
+
+    7. Deeply Nested Associations
+      Syntax: .includes(user: { profile: { avatar_attachment: :blob } })
+      Use: Preloads the user association, for each user their profile, for each profile the avatar_attachment, and then the blob for each avatar_attachment.
+
+    8. Combining Nested and Multiple Associations at Different Levels
+      Syntax: .includes(:activity_creator, user: [:profile, posts: [:comments]])
+      Use: Preloads the activity_creator association at the top level; for each user, preloads their profile and posts, and for each post, preloads its comments.
+
+    9. Using Arrays and Hashes for Complex Scenarios
+      Syntax: .includes({ user: [:profile, { posts: :comments }] }, :activity_creator)
+      Use: Preloads the user association with its profile and posts, for each post preloads its comments, and also preloads the activity_creator at the top level.
+
+to detect these issues automatically you can use the gem 'bullet'
+
+  how to setup the gem 'bullet'
 
     in your Gemfile add this in the development enviroment group
 
