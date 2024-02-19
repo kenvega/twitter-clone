@@ -2,6 +2,7 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    # binding.pry
     @like = current_user.likes.create(tweet: tweet)
 
     Notification.create(notified: tweet.user, notifier: current_user, action: "liked-tweet", tweet: tweet)

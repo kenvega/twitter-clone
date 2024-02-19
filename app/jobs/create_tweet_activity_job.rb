@@ -8,10 +8,15 @@ class CreateTweetActivityJob < ApplicationJob
     # end
 
     # below solution uses gem activerecord-import to make a single (depends on batch_size) big insert query which is more efficient that a lot of short insert queries
+
+    binding.pry
     tweet_activities = activity_creator.followers.map do |follower|
       TweetActivity.new(activity_viewer: follower, activity_creator: activity_creator, tweet: tweet, activity: activity)
     end
 
     TweetActivity.import tweet_activities, on_duplicate_key_ignore: true, batch_size: 500
+  rescue => e
+    Rails.logger.error "Job failed with error: #{e.message}"
+    raise e  # Re-raise the exception for visibility
   end
 end

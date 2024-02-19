@@ -4,6 +4,8 @@ class ReplyTweetsController < ApplicationController
   def create
     @reply_tweet = tweet.reply_tweets.create(tweet_params.merge(user: current_user))
 
+    CreateTweetActivityJob.perform_later(activity_creator: current_user, tweet: tweet, activity: 'replied')
+
     if @reply_tweet.save
       respond_to do |format|
         format.html { redirect_to dashboard_path }

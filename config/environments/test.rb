@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Execute jobs immediately in the test environment
+  Delayed::Worker.delay_jobs = false
 end
