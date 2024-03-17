@@ -3,6 +3,7 @@ requirements to start
   rails version 7.0.4
   node v18.13.0
   make sure you install yarn globally -> npm install -g yarn
+    if you don't have yarn you will probably have issues with precompiling
 
 how to install when cloning this repo
   in the root of this project
@@ -30,6 +31,9 @@ I made sure to create files in the root of the project that forced me to use spe
 
 problems I had creating/setting up the project
   I didn't install yarn before the command so I had problems
+    error: The asset "application.css" is not present in the asset pipeline
+      tried to fixed with: ./bin/rails assets:precompile
+        then i noticed that i didn't have yarn installed globally for my node version
 
   I was using an M1 chip so I had to make sure I did all commands on an i386 architecture
     to see which architecture your terminal/shell is using just run the command: arch

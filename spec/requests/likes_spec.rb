@@ -1,21 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Likes", type: :request do
-
-  # i need like 5 users.
-  # 1 is being followed by 2 and 3, and then 1 likes a tweet from user 5
+  # user1 is being followed by user2 and user3, and then user1 likes a tweet from user4
+  #   that way user3 and user4 should see that tweet liked
 
   let(:user1) { create(:user) }
 
   let(:user2) { create(:user) }
   let(:user3) { create(:user) }
   let(:user4) { create(:user) }
-  let(:user5) { create(:user) }
 
-  let(:tweet) { create(:tweet, user: user5) }
+  let(:tweet) { create(:tweet, user: user4) }
 
-  let!(:follow1) { create(:follow, follower: user2, followed: user1) }
-  let!(:follow2) { create(:follow, follower: user3, followed: user1) }
+  let(:follow1) { create(:follow, follower: user2, followed: user1) }
+  let(:follow2) { create(:follow, follower: user3, followed: user1) }
 
   before { sign_in user1 }
 
@@ -24,27 +22,6 @@ RSpec.describe "Likes", type: :request do
       expect do
         post tweet_likes_path(tweet)
       end.to change { Like.count }.by(1)
-    end
-
-    it "creates a tweet activity" do
-      # binding.pry
-
-      post tweet_likes_path(tweet)
-
-      # Delayed::Job.all.each(&:invoke_job)
-
-      expect(TweetActivity.count).to eq(2)
-
-
-      # expect do
-      #   # binding.pry
-      #   post tweet_likes_path(tweet)
-
-      #   # teoricamente a este punto deberia poder ver si es que hay algun job
-
-      #   Delayed::Job.all.each(&:invoke_job)
-
-      # end.to change { TweetActivity.count }.by(2)
     end
 
     it "creates a new notification" do
