@@ -15,7 +15,10 @@ RSpec.describe "Likes", type: :request do
   let(:follow1) { create(:follow, follower: user2, followed: user1) }
   let(:follow2) { create(:follow, follower: user3, followed: user1) }
 
-  before { sign_in user1 }
+  before do
+    sign_in user1
+    allow(CreateTweetActivityJob).to receive(:perform_later)
+  end
 
   describe "POST create" do
     it "creates a new like" do
@@ -28,6 +31,12 @@ RSpec.describe "Likes", type: :request do
       expect do
         post tweet_likes_path(tweet)
       end.to change { Notification.count }.by(1)
+    end
+
+    it "queues the ViewTweetJob" do
+      post tweet_likes_path(tweet)
+
+      expect(CreateTweetActivityJob).to have_received(:perform_later).with(activity_creator: user1, tweet: tweet, activity: 'liked')
     end
   end
 
