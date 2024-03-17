@@ -18,7 +18,7 @@ class LikesController < ApplicationController
     @like = tweet.likes.find(params[:id])
     @like.destroy
 
-    # when disliking destroy all tweet activities related to that tweet created by the user who liked that tweet
+    # when a user dislikes a tweet, delete all tweet_activities connected to that tweet which were created by the user who originally liked it
     TweetActivity.where(activity_creator: current_user, tweet: tweet, activity: 'liked').destroy_all
 
     respond_to do |format|
