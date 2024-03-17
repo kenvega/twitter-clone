@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     # end
 
     # and after that we needed to load the general activities instead of just the tweets
-    @tweet_activities = current_user.viewable_tweet_activities.includes(tweet: [user: [:avatar_attachment]], activity_creator: []).order(created_at: :desc).map do |tweet_activity|
+    @tweet_activities = current_user.viewable_tweet_activities.includes(tweet: [user: { avatar_attachment: :blob }], activity_creator: []).order(created_at: :desc).map do |tweet_activity|
       TweetPresenter.new(tweet: tweet_activity.tweet, current_user: current_user, tweet_activity: tweet_activity)
     end
   end

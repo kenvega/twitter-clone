@@ -19,7 +19,7 @@ class TweetsController < ApplicationController
     #       TweetActivity.create(activity_viewer: follower, activity_creator: current_user, tweet: @tweet, activity: 'tweeted')
     #     end
 
-    #   doing a background job will make the endpoint to create tweets faster. creating the activities for the followers later
+    #   doing a background job will make the endpoint to create tweets faster by creating the activities for the followers later
     CreateTweetActivityJob.perform_later(activity_creator: current_user, tweet: @tweet, activity: "tweeted")
 
     #   before we were checking with @tweet.save? but now we can also check with @tweet.persisted?

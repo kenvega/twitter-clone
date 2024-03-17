@@ -29,6 +29,8 @@ class TweetPresenter
       "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px; !important\">#{tweet_activity.activity_creator.display_name} replied to</p>"
     when 'retweeted'
       "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px; !important\">#{tweet_activity.activity_creator.display_name} retweeted</p>"
+    when 'tweeted'
+      "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px; !important\">#{tweet_activity.activity_creator.display_name} tweeted</p>"
     else
       ""
     end
