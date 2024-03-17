@@ -37,7 +37,7 @@ RSpec.describe "Likes", type: :request do
       end.to change { Notification.count }.by(1)
     end
 
-    it "queues the ViewTweetJob" do
+    it "queues the CreateTweetActivityJob" do
       post tweet_likes_path(tweet_from_user4)
 
       expect(CreateTweetActivityJob).to have_received(:perform_later).with(activity_creator: user1, tweet: tweet_from_user4, activity: 'liked')
