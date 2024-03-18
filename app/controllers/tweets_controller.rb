@@ -12,6 +12,9 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.create(tweet_params.merge(user: current_user))
 
+    # create activity for own user so that the users can also see their own tweets
+    TweetActivity.create(activity_viewer: current_user, activity_creator: current_user, tweet: @tweet, activity: "tweeted")
+
     # create the activity for the followers of the user that the current user created a tweet
 
     #   below solution is not efficient because a user might have 1 000 000 followers and then this would generate many insert queries. best is first to make it a background job

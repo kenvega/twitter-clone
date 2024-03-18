@@ -2,6 +2,7 @@ tweet distribution types
 
 twitter shows you activities in the homepage based on these and more conditions:
 
+- tweets I myself created
 - tweets from people I'm following
 - tweets that were liked by the people that I'm following
 - tweets that were replied to by the people that I'm following
