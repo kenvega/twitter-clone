@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   resources :hashtags, only: [:index, :show], path: "/explore"
 
+  resources :all_tweets, only: [:index], path: "/all_tweets"
+
   resources :channels, only: [:index], path: "/messages" do
     resources :messages, only: [:index]
   end

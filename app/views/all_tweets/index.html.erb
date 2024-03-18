@@ -1,0 +1,11 @@
+<div class="col-7">
+  <div class="mb-5">
+    <%= link_to "All", all_tweets_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
+  </div>
+
+  <div id="tweets">
+    <%= render partial: "tweets/tweet", collection: @all_tweets, as: :tweet_presenter %>
+  </div>
+</div>
+
+<div class="col">Search Bar / Trending / Who to follow</div>
