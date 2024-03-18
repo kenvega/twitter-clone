@@ -14,6 +14,10 @@ aside.side-navbar {
       }
     }
 
+    &.no-hover div:hover {
+      background-color: unset;
+    }
+
     &.active {
       font-weight: 700;
 
