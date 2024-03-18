@@ -1,0 +1,13 @@
+<div class="col-7">
+  <div class="mb-5">
+    <%= link_to "All Users", users_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
+  </div>
+
+  <div id="users">
+    <%= render partial: "users/user", collection: @users, as: :user_to_render %>
+  </div>
+</div>
+
+<div class="col">
+  <%= render "shared/hashtags_sidebar" %>
+</div>

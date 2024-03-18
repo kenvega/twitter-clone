@@ -7,7 +7,7 @@
       <%= hidden_field_tag :input_receiver_user_id, receiver_message_user&.id %>
       <%= f.text_field :body, placeholder: "Type your message", class: "form-control", disabled: !receiver_message_user %>
       <%= button_tag class: "btn btn-outline-secondary", disabled: !receiver_message_user do %>
-        <%= image_tag "message.svg", size: "17x17" %>
+        <%= image_tag "message-new.svg", size: "17x17" %>
       <% end %>
     </div>
   <% end %>

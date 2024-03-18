@@ -23,6 +23,12 @@
     </div>
   <% end %>
 
+  <%= link_to users_path, class: "d-flex align-items-center fs-5 mb-3 #{nav_link_active?('users')}" do %>
+    <div class="px-4 py-2 rounded-pill">
+      <span class="me-4 position-relative" style="bottom: 3px"><%= image_tag "users.svg", width: "32" %></span> All Users
+    </div>
+  <% end %>
+
   <%= link_to notifications_path, class: "d-flex align-items-center fs-5 mb-3 #{nav_link_active?('notifications')}" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px"><%= image_tag "notification.svg", width: "32" %></span> Notifications

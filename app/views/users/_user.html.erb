@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-around align-items-center pt-4 pb-4 border-bottom border-info-subtle">
+  <div class="d-flex align-items-center">
+    <% if user_to_render.avatar.present? %>
+      <%= link_to user_path(id: user_to_render.id), class: "me-2" do %>
+        <%= image_tag user_to_render.avatar, size: "48x48", class: "rounded-circle" %> 
+      <% end %>
+    <% else %>
+      <%= link_to user_path(id: user_to_render.id), class: "me-2" do %>
+        <%= image_tag "profile.svg", size: "48x48", class: "rounded-circle" %> 
+      <% end %>
+    <% end %>
+    <div>
+      <div><%= user_to_render.display_name %></div>
+      <div class="text-muted">@<%= user_to_render.username %></div>
+    </div>
+  </div>
+  <div>
+    <%= link_to user_path(id: user_to_render.id), class: "btn btn-twitter-outline rounded-pill" do %>
+      Go to profile
+    <% end %>
+  </div>
+</div>

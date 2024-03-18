@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @users = User.all.includes({ avatar_attachment: :blob }).order(created_at: :asc)
+  end
+
   def show
     # redirect to profile path if user to show is currently logged in user
     redirect_to profile_path if params[:id].to_i == current_user.id

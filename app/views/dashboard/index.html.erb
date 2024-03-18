@@ -8,7 +8,12 @@
   </div>
 
   <div id="tweets">
-    <%= render partial: "tweets/tweet", collection: @tweet_activities, as: :tweet_presenter %>
+
+    <% if @tweet_activities.size > 0 %>
+      <%= render partial: "tweets/tweet", collection: @tweet_activities, as: :tweet_presenter %>
+    <% else %>
+      <div class="p-2 text-muted">You can see tweets in your dashboard/feed by following people. Go to see <%= link_to "people to follow", users_path %>.</div>
+    <% end %>
   </div>
 </div>
 

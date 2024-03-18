@@ -20,7 +20,7 @@
     <% else %>
       <div>
         <%= link_to channels_path(receiver_id: user.id), class: "btn btn-twitter-outline rounded-pill" do %>
-          <%= image_tag "message.svg", size: "25x25" %>
+          <%= image_tag "message-new.svg", size: "14x14" %>
           Message
         <% end %>
         <%= render "users/follow_button", follower: current_user, followed: user %>
