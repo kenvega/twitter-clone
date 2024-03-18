@@ -6,6 +6,11 @@
     <% end %>
   </div>
 
+  <%# TODO: too many steps to message someone so nobody will use it. change it so you can talk to anyone you follow %>
+  <% if @current_user_subscribed_channels.size == 0 %>
+    <div>You can message other users by going to their profile (click their avatar) and then clicking the message button</div>
+  <% end %>
+
   <%# The channels where the current user already have with another users. Reciever is also a User instance  %>
   <% @current_user_subscribed_channels.each do |subscribed_channel| %>
     <% if subscribed_channel.new_record? %>
