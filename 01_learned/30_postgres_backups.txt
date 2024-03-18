@@ -1,0 +1,21 @@
+if you want to backup all your postgres database
+
+  you can do this
+
+    <path-of-postgres-pg_dump> <name-of-your-database> > <path-of-your-exported-database-file>.sql
+
+    example for when I'm using Postgres.app for mac
+
+      /Applications/Postgres.app/Contents/Versions/latest/bin/pg_dump twitter_clone_development > ~/Documents/postgresbackups/twitter_clone_dev.sql
+
+      you might be able to just do pg_dump directly if you already have it in your path
+
+        i think this could help but i haven't tried it https://postgresapp.com/documentation/cli-tools.html
+
+  in my case i wanted to backup before resetting the database with rails to test seeds
+
+if you want to recover a postgres backup you could do
+
+  psql your_database_name < backup_file.sql
+
+    haven't tried

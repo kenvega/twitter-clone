@@ -1,0 +1,25 @@
+to destroy all data from your database you can do
+
+  rails db:reset
+
+  this will do the following:
+
+    - drop the databases (development and test databases. probably production too i haven't tested it)
+    - create the databases
+    - load the schema (make sure this is in sync with the migrations)
+    - seed the database
+
+  if you know the schema is not in sync with migrations, then instead of doing reset you can do this:
+
+    rails db:drop db:create db:migrate db:seed
+
+      this will not read from the schema but from the migrations
+
+to seed data so new people coming to your project can jump start with data
+
+  rails db:seed
+
+  you will need to fill the file db/seeds.rb
+
+    creating data that will be necessary. in this case: users, tweets, tweet_activities, etc
+
