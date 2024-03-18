@@ -1,9 +1,12 @@
 <div id="message-form">
+  <% if !receiver_message_user %>
+    <div>select a chat first to send messages</div>
+  <% end %>
   <%= form_with model: Message.new, url: messages_path do |f| %>
     <div class="input-group mb-3">
       <%= hidden_field_tag :input_receiver_user_id, receiver_message_user&.id %>
-      <%= f.text_field :body, placeholder: "Type your message", class: "form-control" %>
-      <%= button_tag class: "btn btn-outline-secondary" do %>
+      <%= f.text_field :body, placeholder: "Type your message", class: "form-control", disabled: !receiver_message_user %>
+      <%= button_tag class: "btn btn-outline-secondary", disabled: !receiver_message_user do %>
         <%= image_tag "message.svg", size: "17x17" %>
       <% end %>
     </div>
