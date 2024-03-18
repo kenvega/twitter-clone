@@ -19,6 +19,11 @@ how to run the app
       bundle exec rails jobs:work
         this runs the workers that pick the queued jobs in the delayed_jobs table
 
+if you have problems from the styles not really changing
+  you might need to run this command
+    ./bin/rails assets:precompile
+
+      and then restart the server with ./bin/dev
 ===
 
 command I used to create this rails project
