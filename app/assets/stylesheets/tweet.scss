@@ -4,6 +4,10 @@
   -webkit-transition: all .2s ease-in;
   transition: all .2s ease-in;
 
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 30px;
+  padding-bottom: 30px !important;
+
   &.hover {
     &:hover {
       background-color: $gray-100;
