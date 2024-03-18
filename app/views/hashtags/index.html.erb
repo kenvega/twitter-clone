@@ -1,9 +1,13 @@
 <div class="col-7">
   <div class="mb-5">
-    <%= link_to "Explore", hashtags_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
+    <%= link_to "Hashtags", hashtags_path, class: "fs-4 text-decoration-none text-black fw-semibold"%>
   </div>
 
-  <%= render @hashtags %>
+  <% if @hashtags.size > 0 %>
+    <%= render @hashtags %>
+  <% else %>
+    <div class="p-2 text-muted">You can create hashtags by tweeting. Just include #keywords #like #these in the tweet</div>
+  <% end %>
 </div>
 
 <div class="col">Search Bar / Trending / Who to follow</div>
