@@ -1,0 +1,3 @@
+- when sending a message the input should clear itself
+
+- try ngrok and add instructions on how to use

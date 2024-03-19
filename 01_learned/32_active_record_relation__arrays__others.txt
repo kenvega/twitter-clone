@@ -1,0 +1,7 @@
+an ActiveRecord::Relation object is essentially a query that has not yet been executed against the database
+
+  how? what? what other things in rails similar to this concept there are?
+
+  how do they differ from arrays? what can you do in ActiveRecord::Relation that you cannot do in arrays and vice versa?
+
+  TODO:
