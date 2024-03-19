@@ -40,6 +40,19 @@ all_users.each do |follower_user|
   users_to_be_followed.each do |user_to_be_followed|
     unless Follow.exists?(follower: follower_user, followed: user_to_be_followed)
       Follow.create(follower: follower_user, followed: user_to_be_followed)
+
+      # create channels/subscriptions for default users
+      follower_channel_subscriptions = Subscription.where(user: follower_user)
+      followed_channel_subscriptions = Subscription.where(user: user_to_be_followed)
+
+      common_channels = follower_channel_subscriptions.pluck(:channel_id) & followed_channel_subscriptions.pluck(:channel_id)
+      already_in_conversation = common_channels.any?
+
+      unless already_in_conversation
+        channel = Channel.create()
+        Subscription.create(user: follower_user, channel_id: channel.id)
+        Subscription.create(user: user_to_be_followed, channel_id: channel.id)
+      end
     end
   end
 end
