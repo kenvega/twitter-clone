@@ -3,8 +3,23 @@ class FollowsController < ApplicationController
   before_action :set_follower_and_followed, only: [:create, :destroy]
 
   def create
+    # create the follow
     follow = @follower.given_follows.create(follow_params)
 
+    # create a channel and subscriptions so people you follow you can later message quicker. but don't create any if those users were talking before
+    follower_channel_subscriptions = Subscription.where(user: @follower)
+    followed_channel_subscriptions = Subscription.where(user: @followed)
+
+    common_channels = follower_channel_subscriptions.pluck(:channel_id) & followed_channel_subscriptions.pluck(:channel_id)
+    already_in_conversation = common_channels.any?
+
+    unless already_in_conversation
+      channel = Channel.create()
+      Subscription.create(user: @follower, channel_id: channel.id)
+      Subscription.create(user: @followed, channel_id: channel.id)
+    end
+
+    # create notification
     @followed.received_notifications.create(action: "followed-me", notifier: @follower)
 
     respond_to do |format|
